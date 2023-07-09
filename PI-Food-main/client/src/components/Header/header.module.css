@@ -1,0 +1,73 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #d97904;
+  min-width: 100vh;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.nav__links button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+.nav__links {
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  display: flex;
+  font-size: 16px;
+  padding: 0;
+}
+
+.button {
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: #d92b04;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+  background-color: #f16e62;
+}
+
+/*SEARCH*/
+.searchbox {
+  left: 50%;
+  background: #d92b04;
+  height: 20px;
+  width: 200px;
+  border-radius: 50px;
+  padding: 8px;
+}
+
+.searchbtn {
+  margin: -5px;
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchtxt {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #f2f2f2;
+}
