@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { recipeAll } from "../redux/actions/getAll";
 import Card from "../components/Card/Card";
@@ -7,6 +7,8 @@ import Header from "../components/Header/Header";
 
 export default function Home() {
   const { recipes, loading, error } = useSelector((state) => state.getAll);
+  const [page, setPage] = useState(0);
+  // const [search, setsearch]= useState("")
 
   const dispatch = useDispatch();
 
