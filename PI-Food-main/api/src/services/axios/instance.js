@@ -7,6 +7,7 @@ const FoodAPI = axios.create({
   // params: {
   //   apiKey: FOOD_API_KEY,
   //   addRecipeInformation: true,
+  //   numer: 100,
   // },
 });
 
