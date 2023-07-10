@@ -12,7 +12,6 @@ const getRecipesApi = async () => {
       `/complexSearch?apiKey=${FOOD_API_KEY}&number=100&addRecipeInformation=true`
     );
 
-    // const infoDiets = request.data.results;
     infoDiets = await request.data.results?.map((e) => {
       return {
         id: e.id,
@@ -155,9 +154,8 @@ const searchById = async (req, res) => {
     if (tipoId === "api") {
       let serchrIdApi = {};
       const recipeApi = await FoodAPI.get(
-        `/${id}/information?apiKey=${FOOD_API_KEY}`
-        // `${API_BASE_URL}/recipes/${id}/information?apiKey=${FOOD_API_KEY}`
-        // FoodAPI.get(`/${id}/information?apiKey=${FOOD_API_KEY}`
+        // `/${id}/information?apiKey=${FOOD_API_KEY}`
+        `${API_BASE_URL}/recipes/${id}/information?apiKey=${FOOD_API_KEY}`
       );
       console.log(recipeApi, "recipeApi");
 
