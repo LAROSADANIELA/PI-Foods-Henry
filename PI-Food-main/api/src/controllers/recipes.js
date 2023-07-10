@@ -8,10 +8,12 @@ const { FOOD_API_KEY, API_BASE_URL } = process.env;
 //https://api.spoonacular.com/recipes/715415/information?apiKey=305fe584bb3b49f29d95d9dd1d1682cd
 const getRecipesApi = async () => {
   try {
-    const request = await FoodAPI.get(
-      `/complexSearch?apiKey=${FOOD_API_KEY}&number=100&addRecipeInformation=true`
-    );
-
+    const request = await FoodAPI.get("/complexSearch", {
+      params: {
+        addRecipeInformation: true,
+        number: 100,
+      },
+    });
     infoDiets = await request.data.results?.map((e) => {
       return {
         id: e.id,
