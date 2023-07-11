@@ -156,8 +156,8 @@ const searchById = async (req, res) => {
     if (tipoId === "api") {
       let serchrIdApi = {};
       const recipeApi = await FoodAPI.get(
-        // `/${id}/information?apiKey=${FOOD_API_KEY}`
-        `${API_BASE_URL}/recipes/${id}/information?apiKey=${FOOD_API_KEY}`
+        `/${id}/information?apiKey=${FOOD_API_KEY}`
+        // `${API_BASE_URL}/recipes/${id}/information?apiKey=${FOOD_API_KEY}`
       );
       console.log(recipeApi, "recipeApi");
 
