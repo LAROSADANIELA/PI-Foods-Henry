@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 10%;
-  background-color: #d97904;
+  background-color: #a9bf04;
   min-width: 100vh;
 }
 
@@ -30,7 +30,7 @@
 .button {
   margin-left: 20px;
   padding: 9px 25px;
-  background-color: #d92b04;
+  background-color: #6e8c03;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -38,13 +38,13 @@
 }
 
 .button:hover {
-  background-color: #f16e62;
+  background-color: #a9bf04;
 }
 
 /*SEARCH*/
 .searchbox {
   left: 50%;
-  background: #d92b04;
+  background: #6e8c03;
   height: 20px;
   width: 200px;
   border-radius: 50px;

@@ -38,7 +38,9 @@ export default function Landing() {
       >
         <div className={styles.divTex}>
           <h2>
-            Find your favorite <br /> recipes in one place.
+            Find your
+            <br /> favorite recipes
+            <br /> in one place.
           </h2>
         </div>
         <div className={styles.divImg}>
