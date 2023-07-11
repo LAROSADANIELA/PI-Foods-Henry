@@ -28,7 +28,7 @@ export default function Header({ value, onChange }) {
           </div>
           <Link to={"/create"} className={styles.li}>
             <button onClick className={styles.button} href="/add">
-              Create
+              Create New Recipe!
             </button>
           </Link>
         </ul>

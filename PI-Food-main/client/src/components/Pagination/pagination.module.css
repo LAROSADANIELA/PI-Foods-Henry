@@ -1,4 +1,5 @@
 .pagination {
+  margin: 0;
 }
 .prev {
   cursor: pointer;

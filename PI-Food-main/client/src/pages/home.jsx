@@ -4,6 +4,9 @@ import { recipeAll } from "../redux/actions/getAll";
 import Card from "../components/Card/Card";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
+import Pagination from "../components/Pagination/Pagination";
+import style from "./home.module.css";
+import Filters from "../components/Filters/Filters";
 
 export default function Home() {
   const { recipes, loading, error } = useSelector((state) => state.getAll);
@@ -16,6 +19,18 @@ export default function Home() {
     dispatch(recipeAll());
   }, []);
 
+  const pageRecipes = () => {
+    return recipes.slice(page, page + 9);
+  };
+
+  const handleNextClick = () => {
+    setPage(page + 9);
+  };
+
+  const handlePrevClick = () => {
+    if (page >= 2) setPage(page - 1);
+  };
+
   console.log(recipes, "recipes");
 
   if (loading) return <p>Loading...</p>;
@@ -25,26 +40,34 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div>
-        {recipes.map((recipe) => {
-          return (
-            <Link
-              style={{
-                textDecoration: "none",
-              }}
-              to={`/recipes/${recipe.id}`}
-            >
-              <Card
-                image={recipe.image}
-                title={recipe.title}
-                name={recipe.diets.map((name) => {
-                  return name;
-                })}
-              />
-            </Link>
-          );
-        })}
+      <div className={style.page}>
+        <Filters className={style.filters} />
+        <div className={style.container}>
+          {pageRecipes().map((recipe) => {
+            return (
+              <Link
+                style={{
+                  textDecoration: "none",
+                }}
+                to={`/recipes/${recipe.id}`}
+              >
+                <Card
+                  image={recipe.image}
+                  title={recipe.title}
+                  name={recipe.diets.map((name) => {
+                    return name;
+                  })}
+                />
+              </Link>
+            );
+          })}
+        </div>
       </div>
+      <Pagination
+        page={page}
+        onClickNextPage={handleNextClick}
+        onClickPrevPage={handlePrevClick}
+      />
     </>
   );
 }
