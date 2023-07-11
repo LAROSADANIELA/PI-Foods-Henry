@@ -28,10 +28,10 @@ export default function Home() {
   };
 
   const handlePrevClick = () => {
-    if (page >= 2) setPage(page - 1);
+    if (page > 0) setPage(page - 9);
   };
 
-  console.log(recipes, "recipes");
+  console.log(page, "recipes");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
