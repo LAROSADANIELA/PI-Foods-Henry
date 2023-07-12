@@ -9,7 +9,9 @@ export default function Pagination({ page, onClickNextPage, onClickPrevPage }) {
         <IoIosArrowBack className={styles.prev} onClick={onClickPrevPage} />
       )}
       <span>{page}</span>
-      <IoIosArrowForward className={styles.next} onClick={onClickNextPage} />
+      {page < 11 && (
+        <IoIosArrowForward className={styles.next} onClick={onClickNextPage} />
+      )}
     </div>
   );
 }

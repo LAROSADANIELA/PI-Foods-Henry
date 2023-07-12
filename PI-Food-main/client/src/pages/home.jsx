@@ -10,8 +10,7 @@ import Filters from "../components/Filters/Filters";
 
 export default function Home() {
   const { recipes, loading, error } = useSelector((state) => state.getAll);
-  const [page, setPage] = useState(0);
-  // const [search, setsearch]= useState("")
+  const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -19,19 +18,31 @@ export default function Home() {
     dispatch(recipeAll());
   }, []);
 
-  const pageRecipes = () => {
-    return recipes.slice(page, page + 9);
-  };
+  let recipesXPage = [];
+
+  function pageRecipes() {
+    let items = page * 9;
+    let recipesXPage = recipes.slice(items, items + 9);
+    console.log(recipesXPage, "recipesXPage");
+    return recipesXPage;
+  }
+
+  // const pageRecipes = () => {
+  //   const items = page * 9;
+  //   const recipesXPage = recipes.slice(items, items + 9);
+  //   console.log(recipesXPage, "recipesXPage");
+  //   return recipesXPage;
+  // };
 
   const handleNextClick = () => {
-    setPage(page + 9);
+    if (recipesXPage.length <= 9) setPage(page + 1);
   };
 
   const handlePrevClick = () => {
-    if (page > 0) setPage(page - 9);
+    if (page > 0) setPage(page - 1);
   };
 
-  console.log(page, "recipes");
+  console.log(page, "page");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
