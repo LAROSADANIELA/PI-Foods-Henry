@@ -79,15 +79,15 @@ const recipesAll = async () => {
     console.log(error);
   }
 };
-const getAll = async (req, res) => {
-  const data = await recipesAll();
-  try {
-    res.status(200).json(data);
-    // console.log(data, "data res200");
-  } catch (error) {
-    res.status(404).send({ msg: "No se pueden mostrar recetas" });
-  }
-};
+// const getAll = async (req, res) => {
+//   const data = await recipesAll();
+//   try {
+//     res.status(200).json(data);
+//     // console.log(data, "data res200");
+//   } catch (error) {
+//     res.status(404).send({ msg: "No se pueden mostrar recetas" });
+//   }
+// };
 
 // [ ] GET /recipes?name="...":
 // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
@@ -134,15 +134,37 @@ const busqueda = async (title) => {
   }
 };
 
-const searchByTitle = async (req, res) => {
+const getAll = async (req, res) => {
   const { title } = req.query;
   if (title) {
-    const resutadoBusqueda = await busqueda(title);
-    res.status(200).json(resutadoBusqueda);
+    if (title) {
+      const resutadoBusqueda = await busqueda(title);
+      res.status(200).json(resutadoBusqueda);
+      console.log(resutadoBusqueda, "busqueda");
+    } else {
+      res.status(404).send({ msg: "No se encontro receta" });
+    }
   } else {
-    res.status(404).send({ msg: "No se encontro receta" });
+    const data = await recipesAll();
+    try {
+      res.status(200).json(data);
+      // console.log(data, "data res200");
+    } catch (error) {
+      res.status(404).send({ msg: "No se pueden mostrar recetas" });
+    }
   }
 };
+
+// const searchByTitle = async (req, res) => {
+//   const { title } = req.query;
+//   if (title) {
+//     const resutadoBusqueda = await busqueda(title);
+//     res.status(200).json(resutadoBusqueda);
+//     console.log(resutadoBusqueda, "busqueda");
+//   } else {
+//     res.status(404).send({ msg: "No se encontro receta" });
+//   }
+// };
 
 // [ ] GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
@@ -238,4 +260,4 @@ const recipePost = async (req, res) => {
   }
 };
 
-module.exports = { getAll, searchByTitle, searchById, recipePost };
+module.exports = { getAll, searchById, recipePost };

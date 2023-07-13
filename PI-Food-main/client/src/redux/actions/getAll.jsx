@@ -32,16 +32,19 @@ export const getRecipesFailure = (payload) => ({
   payload,
 });
 
-export function recipeAll() {
+export function recipeAll(title) {
   return async function (dispatch) {
     try {
       // const dataAll = async () => {
       dispatch(getRecipesRequest());
-      const response = await RecipeApi.get(`/recipes`);
+      const response = await RecipeApi.get(`/recipes`, {
+        params: {
+          title,
+        },
+      });
       dispatch(getRecipesSuccess(response.data));
-      console.log(response, "dataAll");
+      // console.log(response, "dataAll");
       // };
-      // await dataAll();
     } catch (error) {
       dispatch(getRecipesFailure(error.message));
       console.log(error);
