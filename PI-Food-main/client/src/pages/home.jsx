@@ -10,22 +10,20 @@ import Filters from "../components/Filters/Filters";
 
 export default function Home() {
   const { recipes, loading, error } = useSelector((state) => state.getAll);
-  const [page, setPage] = useState(0);
-  const [title, setTitle] = useState("");
-
+  // console.log(recipes, "recipes");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(recipeAll());
   }, []);
+
   //Busqueda por title
+  const [title, setTitle] = useState("");
 
   function handleSearch(e) {
     setTitle(e.target.value);
   }
-
   // console.log(title, "titulo");
-
   const handleSumitSearch = (e) => {
     e.preventDefault();
     if (title) {
@@ -34,28 +32,24 @@ export default function Home() {
   };
 
   //Paginacion
-  let recipesXPage = [];
+  const [currentPage, setCurrentPage] = useState(1);
+  const size = 9; //nro de recetas x pag
+  const lastIndex = currentPage * size; // 1*9=9
+  const firstIndex = lastIndex - size; // 9-9=0
 
-  function pageRecipes() {
-    let items = page * 9;
-    let recipesXPage = recipes.slice(items, items + 9);
-    // console.log(recipesXPage, "recipesXPage");
-    return recipesXPage;
+  const pageNumber = []; //nro de paginas
+  for (let i = 1; i <= Math.ceil(recipes.length / size); i++) {
+    pageNumber.push(i);
+    // console.log(pageNumber, "nro de pagina");
   }
 
-  const handleNextClick = () => {
-    if (recipesXPage.length <= 9) setPage(page + 1);
+  const paginado = (nro) => {
+    setCurrentPage(nro);
   };
-
-  const handlePrevClick = () => {
-    if (page > 0) setPage(page - 1);
-  };
-
-  // console.log(page, "page");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!recipes || recipes.lenght < 1) return <p>Error: {error}</p>;
+  if (!recipes || recipes.length < 1) return <p>Error: {error}</p>;
 
   return (
     <>
@@ -67,30 +61,45 @@ export default function Home() {
       <div className={style.page}>
         <Filters className={style.filters} />
         <div className={style.container}>
-          {pageRecipes().map((recipe) => {
-            return (
-              <Link
-                style={{
-                  textDecoration: "none",
-                }}
-                to={`/recipes/${recipe.id}`}
-              >
-                <Card
-                  image={recipe.image}
-                  title={recipe.title}
-                  name={recipe.diets.map((name) => {
-                    return name;
-                  })}
-                />
-              </Link>
-            );
-          })}
+          {recipes
+            .map((recipe) => {
+              return (
+                <Link
+                  style={{
+                    textDecoration: "none",
+                  }}
+                  to={`/recipes/${recipe.id}`}
+                >
+                  <Card
+                    image={recipe.image}
+                    title={recipe.title}
+                    name={recipe.diets.map((name) => {
+                      return name;
+                    })}
+                  />
+                </Link>
+              );
+            })
+            .slice(firstIndex, lastIndex)}
         </div>
       </div>
       <Pagination
-        page={page}
-        onClickNextPage={handleNextClick}
-        onClickPrevPage={handlePrevClick}
+        handleNextClick={() =>
+          paginado(
+            currentPage === pageNumber.length ? currentPage : currentPage + 1
+          )
+        }
+        handlePrevClick={() =>
+          paginado(currentPage === 1 ? currentPage : currentPage - 1)
+        }
+        button={currentPage}
+        // button={pageNumber?.map((nro) => {
+        //   return (
+        //     <button key={nro} onClick={() => paginado(nro)}>
+        //       {nro}
+        //     </button>
+        //   );
+        // })}
       />
     </>
   );

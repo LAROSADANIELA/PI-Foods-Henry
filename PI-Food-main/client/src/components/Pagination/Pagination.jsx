@@ -2,16 +2,20 @@ import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styles from "./pagination.module.css";
 
-export default function Pagination({ page, onClickNextPage, onClickPrevPage }) {
+export default function Pagination({
+  handlePrevClick,
+  handleNextClick,
+  button,
+}) {
+  // console.log(totalRecipes, "totalrecipes");
+
   return (
     <div className="pagination">
-      {page > 1 && (
-        <IoIosArrowBack className={styles.prev} onClick={onClickPrevPage} />
-      )}
-      <span>{page}</span>
-      {page < 11 && (
-        <IoIosArrowForward className={styles.next} onClick={onClickNextPage} />
-      )}
+      <ul>
+        <IoIosArrowBack className={styles.prev} onClick={handlePrevClick} />
+        <button>{button}</button>
+        <IoIosArrowForward className={styles.next} onClick={handleNextClick} />
+      </ul>
     </div>
   );
 }

@@ -22,7 +22,7 @@ import {
 // }
 
 const initialState = {
-  recipes: null,
+  recipes: [],
   loading: false,
   error: "",
 };
