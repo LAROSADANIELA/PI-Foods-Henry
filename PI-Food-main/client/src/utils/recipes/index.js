@@ -61,7 +61,7 @@
 
 // Esto es para que veas la forma del objeto que espera la funcion en el parametro filters
 const defaultFilters = {
-  recipes: [],
+  diets: [],
   origin: null,
 };
 
@@ -71,26 +71,29 @@ function filterRecipes(recipes, filters = defaultFilters) {
   // 1. diets: que es un array de strings por ejemplo ['gluten free', 'dairy free'] (puede venir vacio)
   // 2. origin (no se si origin es el mejor nombre pero se refiere al origen de la receta, db o api): puede ser 'db' o 'api' o null
 
-  const sortedAndFiltered = recipes;
+  // console.log("recipes", recipes);
+  console.log("filters", filters.diets);
 
   if (filters.diets && filters.diets.length) {
     // Si es que el usuario decidio filtrar por diets, entonces filtramos
     // Es decir que el a la funcion le llega un array NO VACIO de tipos de dietas
-    sortedAndFiltered = sortedAndFiltered.filter((recipe) => {
-      return recipe.diets.some((type) => filters.inludes(type));
+    recipes = recipes.filter((recipe) => {
+      return recipe.diets.some((type) => filters.diets.includes(type));
     });
   }
 
   if (filters.origin) {
     // Si es que el usuario decidio filtrar por origin, entonces filtramos
-    sortedAndFiltered = sortedAndFiltered.filter((recipe) => {
+    recipes = recipes.filter((recipe) => {
       // Esto esta mal, deberias poner una propiedad mas en el modelo de receta
-      return filters.origin === "db"
-        ? typeof recipe.id === "string"
-        : typeof recipe.id === "number";
+      return recipe.dataBase;
+      // return filters.origin === "db"
+      //   ?  recipe.id === "string"
+      //   :  recipe.id === "number";
     });
   }
-  return sortedAndFiltered;
+
+  return recipes;
 }
 
 function sortRecipes(recipes, orderBy) {
@@ -124,7 +127,6 @@ function sortRecipes(recipes, orderBy) {
     }
   }
 
-  console.log(recipes, "recipe");
   return recipes;
 }
 
@@ -132,6 +134,7 @@ export function sortAndFilterRecipes(recipes, options) {
   const { filters, orderBy } = options;
   if (filters) {
     // Si hay filtros, entonces filtra el array
+    // console.log("RUN", filters);
     recipes = filterRecipes(recipes, filters);
   }
   if (orderBy) {

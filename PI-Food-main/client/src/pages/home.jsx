@@ -19,35 +19,58 @@ export default function Home() {
   }, []);
 
   //onSelectTypes,onSelectOrigin,onSelectOrder, estas son mis funciones
-  const [types, setTypes] = useState([]);
+  const [dietsTypes, setDietsTypes] = useState([]);
   const handleSelectTypes = (e) => {
-    setTypes(e.target.value);
-    console.log(e.target.value, "types");
+    console.log(e.target.value, e.target.checked);
+    if (e.target.checked) {
+      // Caso 1: checked es true (el usuario selecciono esta dieta)
+      const arr = dietsTypes.concat(e.target.value);
+      setDietsTypes(arr);
+    } else {
+      // Caso 2: checked es false (el usuario deselecciono esta dieta)
+      // ['vegan', 'carne', 'keto', 'fish']
+      // value:  'keto'
+      const arr = dietsTypes.filter((type) => {
+        return type !== e.target.value;
+        // if (type !== e.target.value) {
+        //   // Si devuelvo false, el valor SI se filtra (no entra en el arr)
+        //   return true;
+        // } else {
+        //   // Si devuelvo true, el valor NO se filtra (si entra en el arr)
+        //   return false;
+        // }
+        // type: 'vegan', 'carne', 'keto', 'fish'
+        // e.target.value: 'keto'
+      });
+      // ['vegan', 'carne', 'fish']
+      setDietsTypes(arr);
+    }
+
+    // setDietsTypes([e.target.value]);
   };
   const [origin, setOrigin] = useState("");
   const handleSelectOrigin = (e) => {
-    setOrigin(e.target.value);
+    if (e.target.checked) {
+      setOrigin(e.target.value);
+    } else setOrigin(null);
+    // Si el usuario deselecciono todos, entonces tener que ponerlo en null
     console.log(e.target.value, "origin");
   };
   const [order, setOrder] = useState("");
   const handleSelectOrder = (e) => {
     setOrder(e.target.value);
-    console.log(e.target.value, "order");
+    // console.log(e.target.value, "order");
   };
 
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
-    options: {
-      orderBy: order,
-      filters: {
-        types,
-        origin,
-      },
+    orderBy: order,
+    filters: {
+      diets: dietsTypes,
+      origin,
     },
   });
 
-  let arr = [];
-  arr = sorterAndFiltered;
-  console.log(sorterAndFiltered, "sorterAndFiltered");
+  console.log("sorterAndFiltered", sorterAndFiltered.length, dietsTypes);
 
   //Busqueda por title
   const [title, setTitle] = useState("");
@@ -98,13 +121,14 @@ export default function Home() {
         />
         <div className={style.container}>
           {sorterAndFiltered
-            .map((recipe) => {
+            .map((recipe, i) => {
               return (
                 <Link
                   style={{
                     textDecoration: "none",
                   }}
                   to={`/recipes/${recipe.id}`}
+                  key={i}
                 >
                   <Card
                     image={recipe.image}
