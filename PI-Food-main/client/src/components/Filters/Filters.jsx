@@ -22,7 +22,6 @@ export default function Filters({
         <div>
           <h5>Filter by:</h5>
           <h5>Diets Types</h5>
-
           {dietsTypes.map((d) => {
             return (
               <div>
