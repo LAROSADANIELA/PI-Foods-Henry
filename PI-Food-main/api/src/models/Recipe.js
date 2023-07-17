@@ -12,6 +12,11 @@ module.exports = (sequelize) => {
         primaryKey: true,
         allowNull: false,
       },
+      dataBase: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "dataBase",
+      },
       title: {
         type: DataTypes.STRING,
         allowNull: false,

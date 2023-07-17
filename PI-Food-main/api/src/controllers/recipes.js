@@ -52,6 +52,7 @@ const getRecipesDB = async () => {
     let response = await request?.map((recipe) => {
       return {
         id: recipe.dataValues.id,
+        dataBase: recipe.dataValues.dataBase,
         title: recipe.dataValues.title,
         summary: recipe.dataValues.summary,
         healthScore: recipe.dataValues.healthScore,
@@ -217,6 +218,7 @@ const searchById = async (req, res) => {
 
       searchIdBD = {
         id: recipeBD.dataValues.id,
+        dataBase: recipeBD.dataValues.dataBase,
         title: recipeBD.dataValues.title,
         summary: recipeBD.dataValues.summary,
         healthScore: recipeBD.dataValues.healthScore,
@@ -241,13 +243,14 @@ const searchById = async (req, res) => {
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // Crea una receta en la base de datos relacionada con sus tipos de dietas.
 const recipePost = async (req, res) => {
-  const { title, summary, healthScore, steps, diet } = req.body;
+  const { title, summary, healthScore, steps, diet, image } = req.body;
   try {
     const newRecipe = await Recipe.create({
       title,
       summary,
       healthScore,
       steps,
+      image,
     });
     let dietTypesRecipeDb = await Diet.findAll({
       where: { name: diet },
