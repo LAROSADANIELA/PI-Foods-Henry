@@ -16,11 +16,10 @@ const getDietsBD = async (req, res) => {
 const populateDBWithDiet = async () => {
   try {
     arr = [
-      "GlutenFree",
+      "Gluten Free",
       "Ketogenic",
       "Vegetarian",
-      "Lacto Vegetarian",
-      "Ovo Vegetarian",
+      "Lacto Ovo Vegetarian",
       "Vegan",
       "Pescetarian",
       "Paleo",

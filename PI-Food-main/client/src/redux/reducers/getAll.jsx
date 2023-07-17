@@ -27,10 +27,6 @@ const initialState = {
   error: "",
 };
 
-// type REQUEST = { type: typeof GET_RECIPES_REQUEST };
-// type SUCCESS = { type: typeof GET_RECIPES_SUCCESS; payload: arrRecipes };
-// type FAILURE = { type: typeof GET_RECIPES_FAILURE; payload: string };
-
 function recipesAllReducer(state = initialState, action) {
   switch (action.type) {
     case GET_RECIPES_REQUEST:

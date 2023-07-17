@@ -7,6 +7,7 @@ import Header from "../components/Header/Header";
 import Pagination from "../components/Pagination/Pagination";
 import style from "./home.module.css";
 import Filters from "../components/Filters/Filters";
+import { sortAndFilterRecipes } from "../utils/recipes";
 
 export default function Home() {
   const { recipes, loading, error } = useSelector((state) => state.getAll);
@@ -17,9 +18,39 @@ export default function Home() {
     dispatch(recipeAll());
   }, []);
 
+  //onSelectTypes,onSelectOrigin,onSelectOrder, estas son mis funciones
+  const [types, setTypes] = useState([]);
+  const handleSelectTypes = (e) => {
+    setTypes(e.target.value);
+    console.log(e.target.value, "types");
+  };
+  const [origin, setOrigin] = useState("");
+  const handleSelectOrigin = (e) => {
+    setOrigin(e.target.value);
+    console.log(e.target.value, "origin");
+  };
+  const [order, setOrder] = useState("");
+  const handleSelectOrder = (e) => {
+    setOrder(e.target.value);
+    console.log(e.target.value, "order");
+  };
+
+  const sorterAndFiltered = sortAndFilterRecipes(recipes, {
+    options: {
+      orderBy: order,
+      filters: {
+        types,
+        origin,
+      },
+    },
+  });
+
+  let arr = [];
+  arr = sorterAndFiltered;
+  console.log(sorterAndFiltered, "sorterAndFiltered");
+
   //Busqueda por title
   const [title, setTitle] = useState("");
-
   function handleSearch(e) {
     setTitle(e.target.value);
   }
@@ -38,7 +69,7 @@ export default function Home() {
   const firstIndex = lastIndex - size; // 9-9=0
 
   const pageNumber = []; //nro de paginas
-  for (let i = 1; i <= Math.ceil(recipes.length / size); i++) {
+  for (let i = 1; i <= Math.ceil(sorterAndFiltered.length / size); i++) {
     pageNumber.push(i);
     // console.log(pageNumber, "nro de pagina");
   }
@@ -59,9 +90,14 @@ export default function Home() {
         onClick={(e) => handleSumitSearch(e)}
       />
       <div className={style.page}>
-        <Filters className={style.filters} />
+        <Filters
+          className={style.filters}
+          onSelectOrder={handleSelectOrder}
+          onSelectTypes={handleSelectTypes}
+          onSelectOrigin={handleSelectOrigin}
+        />
         <div className={style.container}>
-          {recipes
+          {sorterAndFiltered
             .map((recipe) => {
               return (
                 <Link
