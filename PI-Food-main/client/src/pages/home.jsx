@@ -133,6 +133,7 @@ export default function Home() {
                   <Card
                     image={recipe.image}
                     title={recipe.title}
+                    healthScore={recipe.healthScore}
                     name={recipe.diets.map((name) => {
                       return name;
                     })}
