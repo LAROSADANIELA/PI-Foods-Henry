@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { Diet } = require("../db.js");
+const { getRecipesApi } = require("./recipes.js");
 
 // GET /diets:
 // Obtener todos los tipos de dieta posibles
@@ -13,25 +14,51 @@ const getDietsBD = async (req, res) => {
   }
 };
 // En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
+
 const populateDBWithDiet = async () => {
+  const recipes = await getRecipesApi();
   try {
-    arr = [
-      "gluten free",
-      "ketogenic",
-      "vegetarian",
-      "lacto ovo vegetarian",
-      "vegan",
-      "pescetarian",
-      "paleo",
-      "primal",
-      "low fodmap",
-      "whole30",
-    ];
-    arr.map((el) => Diet.findOrCreate({ where: { name: el } }));
+    const types = await recipes.map((recipe) => {
+      return {
+        diets: recipe.diets,
+      };
+    });
+
+    let a = types
+      .map((e) => Object.values(e))
+      .flat()
+      .join(",")
+      .split(",");
+    let b = new Set(a);
+    let c = [...b];
+    let dietsTypes = c.filter((e) => e !== "").slice(1);
+    console.log(dietsTypes, "dietsTypes");
+    dietsTypes.map((diet) => Diet.findOrCreate({ where: { name: diet } }));
     console.log("populateDBWithDiet");
   } catch (error) {
     console.log(error.message);
   }
 };
+
+// const populateDBWithDiet = async () => {
+//   try {
+//     arr = [
+//       "gluten free",
+//       "ketogenic",
+//       "vegetarian",
+//       "lacto ovo vegetarian",
+//       "vegan",
+//       "pescetarian",
+//       "paleo",
+//       "primal",
+//       "low fodmap",
+//       "whole30",
+//     ];
+//     arr.map((el) => Diet.findOrCreate({ where: { name: el } }));
+//     console.log("populateDBWithDiet");
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
 module.exports = { populateDBWithDiet, getDietsBD };

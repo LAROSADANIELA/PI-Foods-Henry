@@ -263,4 +263,4 @@ const recipePost = async (req, res) => {
   }
 };
 
-module.exports = { getAll, searchById, recipePost };
+module.exports = { getAll, searchById, recipePost, getRecipesApi };
