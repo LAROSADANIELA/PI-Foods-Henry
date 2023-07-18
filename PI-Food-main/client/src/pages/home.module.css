@@ -14,6 +14,9 @@
   /* align-items: baseline; */
   /* gap: 15px; */
   /* overflow-x: hidden; */
-  margin-top: 40px;
+  margin-top: 20px;
   right: 5%;
+}
+.pag {
+  margin-top: -15px;
 }

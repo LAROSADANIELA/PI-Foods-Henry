@@ -144,24 +144,26 @@ export default function Home() {
             .slice(firstIndex, lastIndex)}
         </div>
       </div>
-      <Pagination
-        handleNextClick={() =>
-          paginado(
-            currentPage === pageNumber.length ? currentPage : currentPage + 1
-          )
-        }
-        handlePrevClick={() =>
-          paginado(currentPage === 1 ? currentPage : currentPage - 1)
-        }
-        button={currentPage}
-        // button={pageNumber?.map((nro) => {
-        //   return (
-        //     <button key={nro} onClick={() => paginado(nro)}>
-        //       {nro}
-        //     </button>
-        //   );
-        // })}
-      />
+      <div className={style.pag}>
+        <Pagination
+          handleNextClick={() =>
+            paginado(
+              currentPage === pageNumber.length ? currentPage : currentPage + 1
+            )
+          }
+          handlePrevClick={() =>
+            paginado(currentPage === 1 ? currentPage : currentPage - 1)
+          }
+          button={currentPage}
+          // button={pageNumber?.map((nro) => {
+          //   return (
+          //     <button key={nro} onClick={() => paginado(nro)}>
+          //       {nro}
+          //     </button>
+          //   );
+          // })}
+        />
+      </div>
     </>
   );
 }
