@@ -1,28 +1,28 @@
+import { useDispatch, useSelector } from "react-redux";
 import style from "./filters.module.css";
+import { useEffect } from "react";
+import { getDiets } from "../../redux/actions/diets";
 export default function Filters({
   onSelectTypes,
   onSelectOrigin,
   onSelectOrder,
 }) {
-  let dietsTypes = [
-    "gluten free",
-    "ketogenic",
-    "vegetarian",
-    "lacto ovo vegetarian",
-    "vegan",
-    "pescetarian",
-    "paleo",
-    "primal",
-    "low fodmap",
-    "whole30",
-  ];
+  const { diets, loading, error } = useSelector((state) => state.diets);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDiets());
+  }, []);
+  const types = diets.map((d) => d.name);
+  console.log(types);
+
   return (
     <>
       <div className={style.container}>
         <div>
           <h5>Filter by:</h5>
           <h5>Diets Types</h5>
-          {dietsTypes.map((d) => {
+          {types.map((d) => {
             return (
               <div>
                 <input onChange={onSelectTypes} type="checkbox" value={d} />

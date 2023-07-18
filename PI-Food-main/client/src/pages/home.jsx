@@ -154,14 +154,14 @@ export default function Home() {
           handlePrevClick={() =>
             paginado(currentPage === 1 ? currentPage : currentPage - 1)
           }
-          button={currentPage}
-          // button={pageNumber?.map((nro) => {
-          //   return (
-          //     <button key={nro} onClick={() => paginado(nro)}>
-          //       {nro}
-          //     </button>
-          //   );
-          // })}
+          // button={currentPage}
+          button={pageNumber?.map((nro) => {
+            return (
+              <button key={nro} onClick={() => paginado(nro)}>
+                {nro}
+              </button>
+            );
+          })}
         />
       </div>
     </>

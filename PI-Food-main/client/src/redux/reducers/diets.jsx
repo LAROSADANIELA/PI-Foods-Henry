@@ -5,7 +5,7 @@ import {
 } from "../actions/diets";
 
 const initialState = {
-  diets: null,
+  diets: [],
   loading: false,
   error: "",
 };

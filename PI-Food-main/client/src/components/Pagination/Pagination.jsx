@@ -13,7 +13,7 @@ export default function Pagination({
     <div className="pagination">
       <ul>
         <IoIosArrowBack className={styles.prev} onClick={handlePrevClick} />
-        <button>{button}</button>
+        <>{button}</>
         <IoIosArrowForward className={styles.next} onClick={handleNextClick} />
       </ul>
     </div>
