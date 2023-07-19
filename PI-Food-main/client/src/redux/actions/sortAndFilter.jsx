@@ -1,15 +1,28 @@
 export const ADD_DIET_TYPE = "ADD_DIET_TYPE";
-export const addDietType = () => ({
+export const addDietType = (dietsTypes) => ({
   type: ADD_DIET_TYPE,
+  payload: dietsTypes,
 });
 export const REMOVE_DIET_TYPE = "REMOVE_DIET_TYPE";
-export const removeDietType = () => ({
+export const removeDietType = (dietsTypes) => ({
   type: REMOVE_DIET_TYPE,
+  payload: dietsTypes,
 });
-export const SET_ORIGIN = "SET_ORIGIN";
-export const setOrigin = () => ({
-  type: SET_ORIGIN,
-});
+
+export const ADD_ORIGIN = "ADD_ORIGIN";
+export const addOrigin = (origin) => {
+  return {
+    type: ADD_ORIGIN,
+    payload: origin,
+  };
+};
+export const REMOVE_ORIGIN = "REMOVE_ORIGIN";
+export const removeOrigin = (origin) => {
+  return {
+    type: REMOVE_ORIGIN,
+    payload: origin,
+  };
+};
 //fn que devueven acciones
 export const SET_ORDER_BY = "SET_ORDER_BY";
 export const setOrderBy = (orderBy) => {
@@ -18,25 +31,3 @@ export const setOrderBy = (orderBy) => {
     payload: orderBy,
   };
 };
-
-export function selectTypes(e, dietsTypes) {
-  return function (dispatch) {
-    if (e.target.checked) {
-      const arr = dietsTypes.concat(e.target.value);
-      dispatch(addDietType(arr));
-    } else {
-      const arr = dietsTypes.filter((type) => {
-        return type !== e.target.value;
-      });
-      dispatch(removeDietType(arr));
-    }
-  };
-}
-
-export function selectOrigin(e) {
-  return function (dispatch) {
-    if (e.target.checked) {
-      dispatch(setOrigin(e.target.value));
-    } else dispatch(setOrigin(null));
-  };
-}

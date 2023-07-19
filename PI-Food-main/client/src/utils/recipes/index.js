@@ -7,7 +7,7 @@ import {
 // Esto es para que veas la forma del objeto que espera la funcion en el parametro filters
 const defaultFilters = {
   diets: [],
-  origin: null,
+  origin: "",
 };
 
 // El parametro filters es opcional, podes pasarselo o no, si no le pasas nada no va a filtrar nada
@@ -29,13 +29,16 @@ function filterRecipes(recipes, filters = defaultFilters) {
 
   if (filters.origin) {
     // Si es que el usuario decidio filtrar por origin, entonces filtramos
-    recipes = recipes.filter((recipe) => {
-      // Esto esta mal, deberias poner una propiedad mas en el modelo de receta
-      return recipe.dataBase;
-      // return filters.origin === "db"
-      //   ?  recipe.id === "string"
-      //   :  recipe.id === "number";
-    });
+    if (filters.origin === "DB") {
+      recipes = recipes.filter((recipe) => {
+        return recipe.dataBase;
+        // return filters.origin === "db"
+        //   ?  recipe.id === "string"
+        //   :  recipe.id === "number";
+      });
+    } else if (filters.origin === "API") {
+      return recipes;
+    }
   }
 
   return recipes;

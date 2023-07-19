@@ -9,9 +9,14 @@ import style from "./home.module.css";
 import Filters from "../components/Filters/Filters";
 import { sortAndFilterRecipes } from "../utils/recipes";
 import {
+  addDietType,
+  addOrigin,
+  removeDietType,
+  removeOrigin,
   selectOrigin,
   selectTypes,
   setOrderBy,
+  setOrigin,
 } from "../redux/actions/sortAndFilter";
 
 export default function Home() {
@@ -26,15 +31,26 @@ export default function Home() {
   useEffect(() => {
     dispatch(recipeAll());
   }, []);
-
+  //types
   function handleSelectTypes(e) {
-    dispatch(selectTypes(e));
+    if (e.target.checked) {
+      dispatch(addDietType(e.target.value));
+    } else {
+      dispatch(removeDietType(e.target.value));
+    }
   }
+  //origin
+  function handleSelectOrigin(e) {
+    if (e.target.checked) {
+      dispatch(addOrigin(e.target.value));
+    } else {
+      dispatch(removeOrigin(null));
+    }
+  }
+  //order
   function handleSelectOrder(e) {
     dispatch(setOrderBy(e.target.value));
   }
-
-  function handleSelectOrigin() {}
 
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
     orderBy,
@@ -43,7 +59,7 @@ export default function Home() {
       origin,
     },
   });
-
+  console.log("sorterAndFiltered", sorterAndFiltered);
   //Busqueda por title
   function handleSearch(e) {
     setTitle(e.target.value);
