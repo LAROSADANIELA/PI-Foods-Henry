@@ -8,72 +8,43 @@ import Pagination from "../components/Pagination/Pagination";
 import style from "./home.module.css";
 import Filters from "../components/Filters/Filters";
 import { sortAndFilterRecipes } from "../utils/recipes";
+import {
+  selectOrigin,
+  selectTypes,
+  setOrderBy,
+} from "../redux/actions/sortAndFilter";
 
 export default function Home() {
-  const { recipes, loading, error } = useSelector((state) => state.getAll);
-  // console.log(recipes, "recipes");
   const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const { recipes, loading, error } = useSelector((state) => state.getAll);
+  const { dietsTypes, origin, orderBy } = useSelector(
+    (state) => state.sortAndFilter
+  );
 
   useEffect(() => {
     dispatch(recipeAll());
   }, []);
 
-  //onSelectTypes,onSelectOrigin,onSelectOrder, estas son mis funciones
-  const [dietsTypes, setDietsTypes] = useState([]);
-  const handleSelectTypes = (e) => {
-    console.log(e.target.value, e.target.checked);
-    if (e.target.checked) {
-      // Caso 1: checked es true (el usuario selecciono esta dieta)
-      const arr = dietsTypes.concat(e.target.value);
-      setDietsTypes(arr);
-    } else {
-      // Caso 2: checked es false (el usuario deselecciono esta dieta)
-      // ['vegan', 'carne', 'keto', 'fish']
-      // value:  'keto'
-      const arr = dietsTypes.filter((type) => {
-        return type !== e.target.value;
-        // if (type !== e.target.value) {
-        //   // Si devuelvo false, el valor SI se filtra (no entra en el arr)
-        //   return true;
-        // } else {
-        //   // Si devuelvo true, el valor NO se filtra (si entra en el arr)
-        //   return false;
-        // }
-        // type: 'vegan', 'carne', 'keto', 'fish'
-        // e.target.value: 'keto'
-      });
-      // ['vegan', 'carne', 'fish']
-      setDietsTypes(arr);
-    }
+  function handleSelectTypes(e) {
+    dispatch(selectTypes(e));
+  }
+  function handleSelectOrder(e) {
+    dispatch(setOrderBy(e.target.value));
+  }
 
-    // setDietsTypes([e.target.value]);
-  };
-  const [origin, setOrigin] = useState("");
-  const handleSelectOrigin = (e) => {
-    if (e.target.checked) {
-      setOrigin(e.target.value);
-    } else setOrigin(null);
-    // Si el usuario deselecciono todos, entonces tener que ponerlo en null
-    console.log(e.target.value, "origin");
-  };
-  const [order, setOrder] = useState("");
-  const handleSelectOrder = (e) => {
-    setOrder(e.target.value);
-    // console.log(e.target.value, "order");
-  };
+  function handleSelectOrigin() {}
 
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
-    orderBy: order,
+    orderBy,
     filters: {
       diets: dietsTypes,
       origin,
     },
   });
 
-  console.log("sorterAndFiltered", sorterAndFiltered.length, dietsTypes);
-
   //Busqueda por title
-  const [title, setTitle] = useState("");
   function handleSearch(e) {
     setTitle(e.target.value);
   }
@@ -86,7 +57,6 @@ export default function Home() {
   };
 
   //Paginacion
-  const [currentPage, setCurrentPage] = useState(1);
   const size = 9; //nro de recetas x pag
   const lastIndex = currentPage * size; // 1*9=9
   const firstIndex = lastIndex - size; // 9-9=0

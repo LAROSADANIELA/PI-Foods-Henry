@@ -1,64 +1,9 @@
-// function filterRecipes(recipes, filters) {
-//   const filterByDiet = recipes.filter((recipe) => {
-//     recipe.diet.includes(filtro);
-//   });
-//   const recipeBD = recipes.filter((recipe) => {
-//     recipe.id.length > 8;
-//   });
-//   const recipeApi = recipes.filter((recipe) => {
-//     recipe.id.length < 8;
-//   });
-
-//   if (filters === filterByDiet) {
-//     return filterByDiet;
-//   }
-//   if (filters === recipeBD) {
-//     return recipeBD;
-//   }
-//   if (filters === recipeApi) {
-//     return recipeApi;
-//   }
-// }
-
-// function sortRecipes(recipes, orderBy) {
-//   const orderAZ = recipes.sort(function (a, b) {
-//     if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-//     if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
-//     return 0;
-//   });
-
-//   const orderZA = recipes.sort(function (a, b) {
-//     if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
-//     if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
-//     return 0;
-//   });
-
-//   const orderScoreMenor = recipes.sort(function (a, b) {
-//     if (a.healthScore > b.healthScore) return 1;
-//     if (a.healthScore < b.healthScore) return -1;
-//     return 0;
-//   });
-
-//   const orderScoreMayor = recipes.sort(function (a, b) {
-//     if (a.healthScore > b.healthScore) return -1;
-//     if (a.healthScore < b.healthScore) return 1;
-//     return 0;
-//   });
-
-//   if (orderBy === orderAZ) {
-//     return orderAZ;
-//   }
-//   if (orderBy === orderZA) {
-//     return orderZA;
-//   }
-//   if (orderBy === orderScoreMenor) {
-//     return orderScoreMenor;
-//   }
-//   if (orderBy === orderScoreMayor) {
-//     return orderScoreMayor;
-//   }
-// }
-
+import {
+  ASCENDENT,
+  DESCENDENT,
+  HS_ASCENDENT,
+  HS_DESCENDENT,
+} from "./constants";
 // Esto es para que veas la forma del objeto que espera la funcion en el parametro filters
 const defaultFilters = {
   diets: [],
@@ -103,21 +48,21 @@ function sortRecipes(recipes, orderBy) {
   if (orderBy) {
     // Solo ordenamos si a la funcion se le pasa algun criterio de ordenado
     switch (orderBy) {
-      case "asc":
+      case ASCENDENT:
         return recipes.sort((current, next) => {
           // Esto me lo hizo chatgpt jaja
           return current.title.localeCompare(next.title);
         });
-      case "desc":
+      case DESCENDENT:
         return recipes.sort((current, next) => {
           // Esto me lo hizo chatgpt jaja
           return next.title.localeCompare(current.title);
         });
-      case "hsAsc":
+      case HS_ASCENDENT:
         return recipes.sort((current, next) => {
           return current.healthScore - next.healthScore;
         });
-      case "hsDesc":
+      case HS_DESCENDENT:
         return recipes.sort((current, next) => {
           return next.healthScore - current.healthScore;
         });
@@ -134,7 +79,6 @@ export function sortAndFilterRecipes(recipes, options) {
   const { filters, orderBy } = options;
   if (filters) {
     // Si hay filtros, entonces filtra el array
-    // console.log("RUN", filters);
     recipes = filterRecipes(recipes, filters);
   }
   if (orderBy) {

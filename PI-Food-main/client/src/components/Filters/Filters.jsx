@@ -2,6 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./filters.module.css";
 import { useEffect } from "react";
 import { getDiets } from "../../redux/actions/diets";
+import {
+  ASCENDENT,
+  DESCENDENT,
+  HS_ASCENDENT,
+  HS_DESCENDENT,
+} from "../../utils/recipes/constants";
 export default function Filters({
   onSelectTypes,
   onSelectOrigin,
@@ -58,10 +64,10 @@ export default function Filters({
             defaultValue={{ label: "Select Order", value: 0 }}
             onChange={onSelectOrder}
           >
-            <option value="asc">asc</option>
-            <option value="desc">desc</option>
-            <option value="hsAsc">hsAsc</option>
-            <option value="hsDesc">hsDesc</option>
+            <option value={ASCENDENT}>A-Z</option>
+            <option value={DESCENDENT}>Z-A</option>
+            <option value={HS_ASCENDENT}>Score Ascendent</option>
+            <option value={HS_DESCENDENT}>Score Descendent</option>
           </select>
         </div>
         <br />

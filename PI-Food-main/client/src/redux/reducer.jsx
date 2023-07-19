@@ -4,12 +4,13 @@ import diets from "./reducers/diets";
 import getId from "./reducers/getId";
 import postRecipe from "./reducers/postRecipe";
 import getAll from "./reducers/getAll";
+import sortAndFilter from "./reducers/sortAndFilter";
 
 const reducer = combineReducers({
-  //aca van todos los reducers
   diets,
   getAll,
   getId,
   postRecipe,
+  sortAndFilter,
 });
 export default reducer;
