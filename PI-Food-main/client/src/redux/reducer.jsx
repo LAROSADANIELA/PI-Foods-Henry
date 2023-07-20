@@ -3,12 +3,12 @@ import { combineReducers } from "redux";
 import diets from "./reducers/diets";
 import getId from "./reducers/getId";
 import postRecipe from "./reducers/postRecipe";
-import getAll from "./reducers/getAll";
+import recipes from "./reducers/recipes";
 import sortAndFilter from "./reducers/sortAndFilter";
 
 const reducer = combineReducers({
   diets,
-  getAll,
+  recipes,
   getId,
   postRecipe,
   sortAndFilter,

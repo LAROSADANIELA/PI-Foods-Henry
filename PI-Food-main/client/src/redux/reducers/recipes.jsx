@@ -2,32 +2,22 @@ import {
   GET_RECIPES_REQUEST,
   GET_RECIPES_SUCCESS,
   GET_RECIPES_FAILURE,
-} from "../actions/getAll";
+  SET_PAGE,
+} from "../actions/recipes";
 
-//TIPOS
-// type recipeModel = {
-//   id: string;
-//   title: string;
-//   summary: string;
-//   score: number;
-//   healthScore: number;
-//   image: string;
-//   steps: string;
-//   diets: [];
-// };
-// type arrRecipes = Array<recipeModel>;
-
-// export interface RecipesState {
-//   recipes: arrRecipes;
-// }
+const PAGINATION_SIZE = 9;
 
 const initialState = {
   recipes: [],
   loading: false,
   error: "",
+  pagination: {
+    size: PAGINATION_SIZE,
+    page: 1,
+  },
 };
 
-function recipesAllReducer(state = initialState, action) {
+function recipesReducer(state = initialState, action) {
   switch (action.type) {
     case GET_RECIPES_REQUEST:
       return { ...state, loading: true };
@@ -38,9 +28,15 @@ function recipesAllReducer(state = initialState, action) {
     case GET_RECIPES_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
+    case SET_PAGE:
+      return {
+        ...state,
+        pagination: { ...state.pagination, page: action.payload },
+      };
+
     default:
       return state;
   }
 }
 
-export default recipesAllReducer;
+export default recipesReducer;

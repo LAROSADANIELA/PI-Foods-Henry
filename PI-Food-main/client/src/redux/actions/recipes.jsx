@@ -1,17 +1,10 @@
 import { RecipeApi } from "../../services/api/instance";
 
-//TIPOS
-// type recipeModel = {
-//   id: string;
-//   title: string;
-//   summary: string;
-//   score: number;
-//   healthScore: number;
-//   image: string;
-//   steps: string;
-//   diets: [];
-// };
-// type arrRecipes = Array<recipeModel>;
+export const SET_PAGE = "SET_PAGE";
+export const setPage = (page) => ({
+  type: SET_PAGE,
+  payload: page,
+});
 
 //ACCIONES GET RECIPES
 
@@ -32,7 +25,7 @@ export const getRecipesFailure = (payload) => ({
   payload,
 });
 
-export function recipeAll(title) {
+export function getRecipes(title) {
   return async function (dispatch) {
     try {
       // const dataAll = async () => {

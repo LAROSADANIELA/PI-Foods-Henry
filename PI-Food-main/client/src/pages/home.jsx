@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeAll } from "../redux/actions/getAll";
+import { getRecipes, setPage } from "../redux/actions/recipes";
 import Card from "../components/Card/Card";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
@@ -13,23 +13,21 @@ import {
   addOrigin,
   removeDietType,
   removeOrigin,
-  selectOrigin,
-  selectTypes,
   setOrderBy,
-  setOrigin,
 } from "../redux/actions/sortAndFilter";
 
 export default function Home() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const { recipes, loading, error } = useSelector((state) => state.getAll);
+  const { recipes, loading, error, pagination } = useSelector(
+    (state) => state.recipes
+  );
   const { dietsTypes, origin, orderBy } = useSelector(
     (state) => state.sortAndFilter
   );
 
   useEffect(() => {
-    dispatch(recipeAll());
+    dispatch(getRecipes());
   }, []);
   //types
   function handleSelectTypes(e) {
@@ -68,23 +66,30 @@ export default function Home() {
   const handleSumitSearch = (e) => {
     e.preventDefault();
     if (title) {
-      dispatch(recipeAll(title));
+      dispatch(getRecipes(title));
     }
   };
 
   //Paginacion
-  const size = 9; //nro de recetas x pag
-  const lastIndex = currentPage * size; // 1*9=9
-  const firstIndex = lastIndex - size; // 9-9=0
+  const size = pagination.size; //9
+  const lastIndex = pagination.page * pagination.size; //1*9
+  const firstIndex = lastIndex - pagination.size; // 9-9
 
   const pageNumber = []; //nro de paginas
   for (let i = 1; i <= Math.ceil(sorterAndFiltered.length / size); i++) {
     pageNumber.push(i);
-    // console.log(pageNumber, "nro de pagina");
   }
-
-  const paginado = (nro) => {
-    setCurrentPage(nro);
+  const handleNextClick = () => {
+    if (pagination.page < pageNumber.length) {
+      const next = pagination.page + 1;
+      dispatch(setPage(next));
+    }
+  };
+  const handlePrevClick = () => {
+    if (pagination.page > 1) {
+      const prev = pagination.page - 1;
+      dispatch(setPage(prev));
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -132,21 +137,10 @@ export default function Home() {
       </div>
       <div className={style.pag}>
         <Pagination
-          handleNextClick={() =>
-            paginado(
-              currentPage === pageNumber.length ? currentPage : currentPage + 1
-            )
-          }
-          handlePrevClick={() =>
-            paginado(currentPage === 1 ? currentPage : currentPage - 1)
-          }
-          // button={currentPage}
-          button={pageNumber?.map((nro) => {
-            return (
-              <button key={nro} onClick={() => paginado(nro)}>
-                {nro}
-              </button>
-            );
+          handleNextClick={handleNextClick}
+          handlePrevClick={handlePrevClick}
+          nroPage={pageNumber?.map((nro) => {
+            return nro;
           })}
         />
       </div>
