@@ -8,7 +8,6 @@ export default function CardDetails({
   name,
   healthScore,
   image,
-  types,
   summary,
   steps,
 }) {
@@ -20,9 +19,9 @@ export default function CardDetails({
         <ul>
           <li>{name}</li>
         </ul>
-        <ul>
-          <li>{types}</li>
-        </ul>
+        {/* <ul>
+          <li>{diets}</li>
+        </ul> */}
         <p>{summary}</p>
         <p>{steps}</p>
         {/* <p>Released: {game.released}</p>

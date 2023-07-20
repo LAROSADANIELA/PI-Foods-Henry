@@ -185,7 +185,7 @@ const searchById = async (req, res) => {
       console.log(recipeApi, "recipeApi");
 
       serchrIdApi = {
-        name: recipeApi.data.title,
+        title: recipeApi.data.title,
         vegetarian: recipeApi.data.vegetarian,
         vegan: recipeApi.data.vegan,
         glutenFree: recipeApi.data.glutenFree,
@@ -215,7 +215,7 @@ const searchById = async (req, res) => {
           },
         },
       });
-
+      console.log(recipeBD, "recipeBD");
       searchIdBD = {
         id: recipeBD.dataValues.id,
         dataBase: recipeBD.dataValues.dataBase,
@@ -226,12 +226,21 @@ const searchById = async (req, res) => {
         steps: recipeBD.dataValues.steps,
         diets: recipeBD.diets?.map((diet) => diet.dataValues.name),
       };
-
       console.log(searchIdBD, "busqueda de BD");
-      // return res.send(searchIdBD);
-      searchIdBD.length > 0
-        ? await res.status(200).json(searchIdBD)
-        : await res.status(404).send({ msg: "No se encontro receta en BD" });
+      return res.send(searchIdBD);
+
+      // function object(searchIdBD) {
+      //   return Object.keys(searchIdBD).length === 0;
+      // }
+
+      // object(searchIdBD) === false
+      //   ? await res.status(200).json(searchIdBD)
+      //   : await res.status(404).send({ msg: "No se encontro receta en BD" });
+      // if (searchIdBD) {
+      //   await res.status(200).json(searchIdBD);
+      // } else {
+      //   await res.status(404).send({ msg: "No se encontro receta en BD" });
+      // }
     }
   } catch (error) {
     console.log(error, "eeror");

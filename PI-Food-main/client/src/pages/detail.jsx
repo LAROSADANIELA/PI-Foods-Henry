@@ -22,13 +22,13 @@ export default function Detail() {
   return (
     <CardDetails
       image={recipeId.image}
-      title={recipeId.name}
+      title={recipeId.title}
       name={recipeId.diets.map((name) => {
         return name;
       })}
-      types={recipeId.types.map((e) => {
-        return e;
-      })}
+      // diets={recipeId.diets.map((e) => {
+      //   return e;
+      // })}
       healthScore={recipeId.healthScore}
       summary={recipeId.summary}
       steps={recipeId.steps}
