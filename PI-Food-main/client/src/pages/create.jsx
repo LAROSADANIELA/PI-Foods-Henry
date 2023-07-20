@@ -73,8 +73,17 @@ export default function Create() {
 
     if (Object.keys(err).length === 0) {
       dispatch(postRecipe(recipe));
-      console.log("Enviando formulario");
+      // console.log("Enviando formulario");
+      alert("Receta creada");
     }
+    setRecipe({
+      title: "",
+      summary: "",
+      steps: "",
+      healthScore: "",
+      image: "",
+      diet: [],
+    });
   }
   console.log(recipe, "Receta creada");
 
