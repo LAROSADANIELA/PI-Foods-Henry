@@ -26,8 +26,8 @@ export default function Filters({
     <>
       <div className={style.container}>
         <div>
-          <h5>Filter by:</h5>
-          <h5>Diets Types</h5>
+          <h5>Filter by</h5>
+          <h5>Types</h5>
           {types.map((d) => {
             return (
               <div>
@@ -36,7 +36,7 @@ export default function Filters({
               </div>
             );
           })}
-          <h5>Origin Diets</h5>
+          <h5>Origin</h5>
           <div>
             <input
               onChange={onSelectOrigin}
