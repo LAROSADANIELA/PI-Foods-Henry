@@ -1,21 +1,19 @@
 import React from "react";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styles from "./pagination.module.css";
-
 export default function Pagination({
   handlePrevClick,
   handleNextClick,
-  button,
+  nroPage,
 }) {
-  // console.log(totalRecipes, "totalrecipes");
-
   return (
-    <div className="pagination">
-      <ul>
-        <IoIosArrowBack className={styles.prev} onClick={handlePrevClick} />
-        <>{button}</>
-        <IoIosArrowForward className={styles.next} onClick={handleNextClick} />
-      </ul>
+    <div className={styles.conteiner}>
+      <div className={styles.prev}>
+        <button onClick={handlePrevClick}>PREV</button>
+      </div>
+      <div className={styles.nroPage}>{nroPage}</div>
+      <div className={styles.prev}>
+        <button onClick={handleNextClick}>NEXT</button>
+      </div>
     </div>
   );
 }

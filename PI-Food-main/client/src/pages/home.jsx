@@ -140,7 +140,7 @@ export default function Home() {
           handleNextClick={handleNextClick}
           handlePrevClick={handlePrevClick}
           nroPage={pageNumber?.map((nro) => {
-            return nro;
+            return <span>{nro}&nbsp;</span>;
           })}
         />
       </div>
