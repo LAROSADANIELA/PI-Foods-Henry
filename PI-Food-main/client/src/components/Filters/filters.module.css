@@ -1,7 +1,9 @@
 .container {
-  background-color: brown;
+  background-color: #d97904;
   width: 300px;
-  height: 75vh;
+  height: 60vh;
   margin: 20px;
   margin-top: 40px;
+  border-radius: 15px;
+  color: #f2f2f2;
 }

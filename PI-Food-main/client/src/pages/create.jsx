@@ -100,7 +100,7 @@ export default function Create() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!diets || diets.lenght < 1) return <p>Error: {error}</p>;
+  if (!diets || diets.length < 1) return <p>Error: {error}</p>;
 
   return (
     <>
