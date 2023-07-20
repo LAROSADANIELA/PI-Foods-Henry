@@ -30,7 +30,7 @@ const getRecipesApi = async () => {
         diets: e.diets?.map((diet) => diet),
       };
     });
-    // console.log(infoDiets, "infoDiets");
+
     return infoDiets;
   } catch (error) {
     console.log(error);
@@ -62,7 +62,6 @@ const getRecipesDB = async () => {
       };
     });
 
-    // console.log(response, "response");
     return response;
   } catch (error) {
     console.log(error);
@@ -74,21 +73,12 @@ const recipesAll = async () => {
   const BD = await getRecipesDB();
   try {
     const allData = await api.concat(BD);
-    // console.log(allData, "allData");
+
     return allData;
   } catch (error) {
     console.log(error);
   }
 };
-// const getAll = async (req, res) => {
-//   const data = await recipesAll();
-//   try {
-//     res.status(200).json(data);
-//     // console.log(data, "data res200");
-//   } catch (error) {
-//     res.status(404).send({ msg: "No se pueden mostrar recetas" });
-//   }
-// };
 
 // [ ] GET /recipes?name="...":
 // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
@@ -149,23 +139,11 @@ const getAll = async (req, res) => {
     const data = await recipesAll();
     try {
       res.status(200).json(data);
-      // console.log(data, "data res200");
     } catch (error) {
       res.status(404).send({ msg: "No se pueden mostrar recetas" });
     }
   }
 };
-
-// const searchByTitle = async (req, res) => {
-//   const { title } = req.query;
-//   if (title) {
-//     const resutadoBusqueda = await busqueda(title);
-//     res.status(200).json(resutadoBusqueda);
-//     console.log(resutadoBusqueda, "busqueda");
-//   } else {
-//     res.status(404).send({ msg: "No se encontro receta" });
-//   }
-// };
 
 // [ ] GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
@@ -180,7 +158,6 @@ const searchById = async (req, res) => {
       let serchrIdApi = {};
       const recipeApi = await FoodAPI.get(
         `/${id}/information?apiKey=${FOOD_API_KEY}`
-        // `${API_BASE_URL}/recipes/${id}/information?apiKey=${FOOD_API_KEY}`
       );
       console.log(recipeApi, "recipeApi");
 
@@ -198,12 +175,7 @@ const searchById = async (req, res) => {
         summary: recipeApi.data.summary,
         steps: recipeApi.data.instructions,
       };
-
-      // console.log(serchrIdApi, "id Api");
       return res.send(serchrIdApi);
-      // dietIdApi.length > 0
-      //   ? await res.status(200).json(dietIdApi)
-      //   : await res.status(404).send({ msg: "No se encontro receta en API" });
     } else {
       let searchIdBD = {};
       const recipeBD = await Recipe.findByPk(id, {
@@ -228,19 +200,6 @@ const searchById = async (req, res) => {
       };
       console.log(searchIdBD, "busqueda de BD");
       return res.send(searchIdBD);
-
-      // function object(searchIdBD) {
-      //   return Object.keys(searchIdBD).length === 0;
-      // }
-
-      // object(searchIdBD) === false
-      //   ? await res.status(200).json(searchIdBD)
-      //   : await res.status(404).send({ msg: "No se encontro receta en BD" });
-      // if (searchIdBD) {
-      //   await res.status(200).json(searchIdBD);
-      // } else {
-      //   await res.status(404).send({ msg: "No se encontro receta en BD" });
-      // }
     }
   } catch (error) {
     console.log(error, "eeror");

@@ -7,7 +7,6 @@ const { getRecipesApi } = require("./recipes.js");
 const getDietsBD = async (req, res) => {
   try {
     const prueba = await Diet.findAll();
-    // res.send(prueba);
     res.status(200).json(prueba);
   } catch (error) {
     res.status(404).send({ msg: "No buco dietas" });
@@ -32,33 +31,12 @@ const populateDBWithDiet = async () => {
     let b = new Set(a);
     let c = [...b];
     let dietsTypes = c.filter((e) => e !== "").slice(1);
-    console.log(dietsTypes, "dietsTypes");
+    // console.log(dietsTypes, "dietsTypes");
     dietsTypes.map((diet) => Diet.findOrCreate({ where: { name: diet } }));
     console.log("populateDBWithDiet");
   } catch (error) {
     console.log(error.message);
   }
 };
-
-// const populateDBWithDiet = async () => {
-//   try {
-//     arr = [
-//       "gluten free",
-//       "ketogenic",
-//       "vegetarian",
-//       "lacto ovo vegetarian",
-//       "vegan",
-//       "pescetarian",
-//       "paleo",
-//       "primal",
-//       "low fodmap",
-//       "whole30",
-//     ];
-//     arr.map((el) => Diet.findOrCreate({ where: { name: el } }));
-//     console.log("populateDBWithDiet");
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
 
 module.exports = { populateDBWithDiet, getDietsBD };
