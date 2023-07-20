@@ -140,7 +140,11 @@ export default function Home() {
           handleNextClick={handleNextClick}
           handlePrevClick={handlePrevClick}
           nroPage={pageNumber?.map((nro) => {
-            return <span>{nro}&nbsp;</span>;
+            return (
+              <span style={nro == pagination.page ? { color: "#6E8C03" } : {}}>
+                {nro}&nbsp;
+              </span>
+            );
           })}
         />
       </div>
