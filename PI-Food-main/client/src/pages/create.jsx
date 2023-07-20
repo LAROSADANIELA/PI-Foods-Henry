@@ -212,15 +212,15 @@ export default function Create() {
           </div>
           <br />
           <div className={styles.btn}>
+            <Link to={"/home"}>
+              {" "}
+              <Button label="back" />
+            </Link>
             <Button
               label="add"
               type="submit"
               onClick={(e) => handleSubmit(e)}
             />
-            <Link to={"/home"}>
-              {" "}
-              <Button label="back" />
-            </Link>
           </div>
         </form>
       </div>
