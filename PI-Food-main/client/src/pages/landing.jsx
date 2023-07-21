@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // import image from "../assets/img/img.jpg";
 
-import styles from "./landing.module.css";
+import styles from "./pages.module.css";
 
 import comida1 from "../assets/img/comida1.png";
 import comida2 from "../assets/img/comida2.png";

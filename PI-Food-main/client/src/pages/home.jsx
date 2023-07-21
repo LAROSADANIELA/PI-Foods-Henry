@@ -5,7 +5,7 @@ import Card from "../components/Card/Card";
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Pagination from "../components/Pagination/Pagination";
-import style from "./home.module.css";
+import style from "./pages.module.css";
 import Filters from "../components/Filters/Filters";
 import { sortAndFilterRecipes } from "../utils/recipes";
 import {
@@ -123,7 +123,7 @@ export default function Home() {
             onClick={(e) => handleReset(e)}
           />
         </div>
-        <div className={style.container}>
+        <div className={style.containerHome}>
           {sorterAndFiltered
             .map((recipe, i) => {
               return (

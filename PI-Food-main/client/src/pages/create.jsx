@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../components/Input/input.module.css";
+import styles from "./pages.module.css";
 import Button from "../components/Button/Button";
 import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDiets } from "../redux/actions/diets";
 import { postRecipe } from "../redux/actions/postRecipe";
 import Inputt from "../components/Input/Input";
+import Button2 from "../components/Button2/Button2";
 
 export default function Create() {
   const { diets, loading, error } = useSelector((state) => state.diets);
@@ -115,10 +116,10 @@ export default function Create() {
   return (
     <>
       <Header />
-      <div className={styles.container}>
-        <form autoComplete="off">
+      <div className={styles.containerCreate}>
+        <div autoComplete="off" className={styles.form}>
           <h3 className={styles.h3}>Add new Recipe</h3>
-          <div className={styles.divInput}>
+          <div className={styles.input}>
             <Inputt
               onChange={(e) => handleChange(e)}
               className={styles.input}
@@ -131,10 +132,9 @@ export default function Create() {
             {errors.title && <p className={styles.p}>{errors.title}</p>}
           </div>
 
-          <div className={styles.divInput}>
+          <div className={styles.input}>
             <Inputt
               onChange={(e) => handleChange(e)}
-              className={styles.input}
               type="text"
               id="summary"
               name="summary"
@@ -143,10 +143,9 @@ export default function Create() {
             />
             {errors.summary && <p className={styles.p}>{errors.summary}</p>}
           </div>
-          <div className={styles.divInput}>
+          <div className={styles.input}>
             <Inputt
               onChange={(e) => handleChange(e)}
-              className={styles.input}
               type="text"
               id="steps"
               name="steps"
@@ -156,10 +155,9 @@ export default function Create() {
             />
             {errors.steps && <p className={styles.p}>{errors.steps}</p>}
           </div>
-          <div className={styles.divInput}>
+          <div className={styles.input}>
             <Inputt
               onChange={(e) => handleChange(e)}
-              className={styles.input}
               type="number"
               id="healthScore"
               name="healthScore"
@@ -170,10 +168,9 @@ export default function Create() {
               <p className={styles.p}>{errors.healthScore}</p>
             )}
           </div>
-          <div className={styles.divInput}>
+          <div className={styles.input}>
             <Inputt
               onChange={(e) => handleChange(e)}
-              className={styles.input}
               type="text"
               id="image"
               name="image"
@@ -213,18 +210,14 @@ export default function Create() {
             ))}
           </div>
           <br />
-          <div className={styles.btn}>
-            <Link to={"/home"}>
-              {" "}
-              <Button label="back" />
-            </Link>
-            <Button
-              label="add"
-              type="submit"
-              onClick={(e) => handleSubmit(e)}
-            />
-          </div>
-        </form>
+        </div>
+        <div className={styles.buttons}>
+          <Link to={"/home"}>
+            {" "}
+            <Button2 label="BACK" />
+          </Link>
+          <Button2 label="ADD" type="submit" onClick={(e) => handleSubmit(e)} />
+        </div>
       </div>
     </>
   );
