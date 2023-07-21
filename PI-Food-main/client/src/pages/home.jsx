@@ -13,6 +13,7 @@ import {
   addOrigin,
   removeDietType,
   removeOrigin,
+  reset,
   setOrderBy,
 } from "../redux/actions/sortAndFilter";
 import Inputs from "../components/Filters/Inputs";
@@ -49,6 +50,10 @@ export default function Home() {
   //order
   function handleSelectOrder(e) {
     dispatch(setOrderBy(e.target.value));
+  }
+  //reset
+  function handleReset() {
+    dispatch(reset());
   }
 
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
@@ -115,6 +120,7 @@ export default function Home() {
             onSelectOrder={handleSelectOrder}
             onSelectTypes={handleSelectTypes}
             onSelectOrigin={handleSelectOrigin}
+            onClick={(e) => handleReset(e)}
           />
         </div>
         <div className={style.container}>

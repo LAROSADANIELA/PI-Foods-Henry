@@ -4,6 +4,7 @@ import {
   ADD_ORIGIN,
   REMOVE_ORIGIN,
   SET_ORDER_BY,
+  RESET,
 } from "../actions/sortAndFilter";
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
 
 function sortAndFilterReducer(state = initialState, action) {
   const dietsTypes = state.dietsTypes;
-  console.log(action, "action.payload");
+
   switch (action.type) {
     case ADD_DIET_TYPE:
       return { ...state, dietsTypes: dietsTypes.concat(action.payload) };
@@ -32,6 +33,8 @@ function sortAndFilterReducer(state = initialState, action) {
       return { ...state, origin: action.payload };
     case SET_ORDER_BY:
       return { ...state, orderBy: action.payload };
+    case RESET:
+      return initialState;
     default:
       return state;
   }

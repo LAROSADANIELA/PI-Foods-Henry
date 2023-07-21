@@ -9,11 +9,12 @@ import {
   HS_ASCENDENT,
   HS_DESCENDENT,
 } from "../../utils/recipes/constants";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+
 export default function Filters({
   onSelectTypes,
   onSelectOrigin,
   onSelectOrder,
+  onClick,
 }) {
   const { diets, loading, error } = useSelector((state) => state.diets);
   const dispatch = useDispatch();
@@ -74,14 +75,7 @@ export default function Filters({
         </div>
 
         <div className={style.reset}>
-          <Link
-            to={"/home"}
-            style={{
-              textDecoration: "none",
-            }}
-          >
-            <Button2 label="reset" />
-          </Link>
+          <Button2 label="reset" onClick={onClick} />
         </div>
       </div>
     </>
