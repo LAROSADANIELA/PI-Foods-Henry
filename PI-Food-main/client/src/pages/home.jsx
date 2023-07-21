@@ -15,6 +15,7 @@ import {
   removeOrigin,
   setOrderBy,
 } from "../redux/actions/sortAndFilter";
+import Inputs from "../components/Filters/Inputs";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -98,18 +99,24 @@ export default function Home() {
 
   return (
     <>
-      <Header
-        value={title}
-        onchange={handleSearch}
-        onClick={(e) => handleSumitSearch(e)}
-      />
+      <div className={style.nav}>
+        <Header className={style.header} />
+      </div>
       <div className={style.page}>
-        <Filters
-          className={style.filters}
-          onSelectOrder={handleSelectOrder}
-          onSelectTypes={handleSelectTypes}
-          onSelectOrigin={handleSelectOrigin}
-        />
+        <div className={style.filtersInputs}>
+          <Inputs
+            className={style.Inputs}
+            value={title}
+            onchange={handleSearch}
+            onClick={(e) => handleSumitSearch(e)}
+          />
+          <Filters
+            className={style.filters}
+            onSelectOrder={handleSelectOrder}
+            onSelectTypes={handleSelectTypes}
+            onSelectOrigin={handleSelectOrigin}
+          />
+        </div>
         <div className={style.container}>
           {sorterAndFiltered
             .map((recipe, i) => {

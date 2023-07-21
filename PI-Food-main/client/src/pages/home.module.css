@@ -20,3 +20,8 @@
 .pag {
   margin-top: -15px;
 }
+
+.filtersInputs {
+  align-items: center;
+  justify-content: center;
+}

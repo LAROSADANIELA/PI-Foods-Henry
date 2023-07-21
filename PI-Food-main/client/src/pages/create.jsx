@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../components/Input/input.module.css";
 import Button from "../components/Button/Button";
+import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDiets } from "../redux/actions/diets";
@@ -113,6 +114,7 @@ export default function Create() {
 
   return (
     <>
+      <Header />
       <div className={styles.container}>
         <form autoComplete="off">
           <h3 className={styles.h3}>Add new Recipe</h3>

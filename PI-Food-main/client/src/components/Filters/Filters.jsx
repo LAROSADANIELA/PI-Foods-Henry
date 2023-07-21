@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./filters.module.css";
+import Button2 from "../Button2/Button2";
 import { useEffect } from "react";
 import { getDiets } from "../../redux/actions/diets";
 import {
@@ -8,6 +9,7 @@ import {
   HS_ASCENDENT,
   HS_DESCENDENT,
 } from "../../utils/recipes/constants";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 export default function Filters({
   onSelectTypes,
   onSelectOrigin,
@@ -70,9 +72,16 @@ export default function Filters({
             <option value={HS_DESCENDENT}>Score Descendent</option>
           </select>
         </div>
-        <br />
-        <div>
-          <button>Reset</button>
+
+        <div className={style.reset}>
+          <Link
+            to={"/home"}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <Button2 label="reset" />
+          </Link>
         </div>
       </div>
     </>
