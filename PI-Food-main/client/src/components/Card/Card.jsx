@@ -5,7 +5,7 @@ export default function Card({ image, title, name, healthScore }) {
   return (
     <div className={styles.card}>
       <section className={styles.section}>
-        <img src={image} alt="Gretis"></img>
+        <img src={image} alt="food"></img>
       </section>
 
       <div className={styles.tex}>

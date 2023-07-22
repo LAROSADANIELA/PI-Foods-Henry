@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipeId } from "../redux/actions/getId";
+import { getRecipeId } from "../redux/actions/searchRecipeById";
 import { useParams } from "react-router-dom";
 import CardDetails from "../components/CardDetails/CardDetails";
 
@@ -26,9 +26,6 @@ export default function Detail() {
       name={recipeId.diets.map((name) => {
         return name;
       })}
-      // diets={recipeId.diets.map((e) => {
-      //   return e;
-      // })}
       healthScore={recipeId.healthScore}
       summary={recipeId.summary}
       steps={recipeId.steps}

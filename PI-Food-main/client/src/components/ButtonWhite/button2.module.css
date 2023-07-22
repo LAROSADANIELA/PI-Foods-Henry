@@ -1,0 +1,16 @@
+.btn {
+  position: relative;
+  left: 5%;
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  padding: 10px;
+  margin: 20px;
+  width: 100px;
+  cursor: pointer;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 50px;
+  color: #6e8c03;
+  box-shadow: 3px 3px 3px -1px rgba(10, 99, 169, 0.16),
+    -3px -3px 3px -1px rgba(255, 255, 255, 0.7);
+}

@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
 import diets from "./reducers/diets";
-import getId from "./reducers/getId";
-import postRecipe from "./reducers/postRecipe";
+import getId from "./reducers/searchRecipeById";
+import postRecipe from "./reducers/CreateRecipe";
 import recipes from "./reducers/recipes";
 import sortAndFilter from "./reducers/sortAndFilter";
 

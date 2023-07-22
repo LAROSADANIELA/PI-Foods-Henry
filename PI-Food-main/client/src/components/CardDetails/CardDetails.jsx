@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./cardDetails.module.css";
-import Button from "../Button/Button";
+import Button from "../ButtonBlack/Button";
 
 export default function CardDetails({
   title,
@@ -19,25 +19,8 @@ export default function CardDetails({
         <ul>
           <li>{name}</li>
         </ul>
-        {/* <ul>
-          <li>{diets}</li>
-        </ul> */}
         <p>{summary}</p>
         <p>{steps}</p>
-        {/* <p>Released: {game.released}</p>
-        <p>Genres:</p>
-        <ul>
-          {game.genres.map((g) => {
-            return <li>{g.name}</li>;
-          })}
-        </ul>
-        <p>Platforms:</p>
-        <ul>
-          {platform.map((name) => {
-            return <li>{name}</li>;
-          })}
-        </ul> */}
-
         <Link to={"/home"}>
           <Button label="Back" />
         </Link>

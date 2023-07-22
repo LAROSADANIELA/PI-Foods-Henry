@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./pages.module.css";
-import Button from "../components/Button/Button";
 import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getDiets } from "../redux/actions/diets";
-import { postRecipe } from "../redux/actions/postRecipe";
+import { postRecipe } from "../redux/actions/CreateRecipe";
 import Inputt from "../components/Input/Input";
-import Button2 from "../components/Button2/Button2";
+import Button2 from "../components/ButtonWhite/Button2";
 
 export default function Create() {
   const { diets, loading, error } = useSelector((state) => state.diets);

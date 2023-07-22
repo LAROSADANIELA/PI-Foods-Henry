@@ -28,7 +28,6 @@ export const getRecipesFailure = (payload) => ({
 export function getRecipes(title) {
   return async function (dispatch) {
     try {
-      // const dataAll = async () => {
       dispatch(getRecipesRequest());
       const response = await RecipeApi.get(`/recipes`, {
         params: {

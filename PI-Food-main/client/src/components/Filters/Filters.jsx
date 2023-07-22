@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./filters.module.css";
-import Button2 from "../Button2/Button2";
+import Button2 from "../ButtonWhite/Button2";
 import { useEffect } from "react";
 import { getDiets } from "../../redux/actions/diets";
 import {
