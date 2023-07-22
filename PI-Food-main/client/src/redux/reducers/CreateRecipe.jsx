@@ -2,7 +2,7 @@ import {
   POST_RECIPE_REQUEST,
   POST_RECIPE_SUCCESS,
   POST_RECIPE_FAILURE,
-} from "../actions/CreateRecipe";
+} from "../actions/createRecipe";
 
 const initialState = {
   recipe: null,
