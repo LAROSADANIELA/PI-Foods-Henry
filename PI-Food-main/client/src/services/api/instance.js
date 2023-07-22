@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const { base_URL } = process.env;
+const BASE_URL = process.env;
 export const RecipeApi = axios.create({
-  baseURL: base_URL,
+  BASE_URL,
 });
