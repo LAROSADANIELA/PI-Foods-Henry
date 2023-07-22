@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const BASE_URL = process.env;
 export const RecipeApi = axios.create({
-  BASE_URL,
+  baseURL: "http://localhost:3001",
 });
