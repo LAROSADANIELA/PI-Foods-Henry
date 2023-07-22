@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeId } from "../redux/actions/searchRecipeById";
 import { useParams } from "react-router-dom";
-import CardDetails from "../components/CardDetails/CardDetails";
+import CardDetails from "../components/cardDetails/CardDetails";
 
 export default function Detail() {
   const { recipeId, loading, error } = useSelector((state) => state.getId);

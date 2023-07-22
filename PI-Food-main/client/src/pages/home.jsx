@@ -1,12 +1,8 @@
+import style from "./pages.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes, setPage } from "../redux/actions/recipes";
-import Card from "../components/Card/Card";
 import { Link } from "react-router-dom";
-import Header from "../components/Header/Header";
-import Pagination from "../components/Pagination/Pagination";
-import style from "./pages.module.css";
-import Filters from "../components/Filters/Filters";
 import { sortAndFilterRecipes } from "../utils/recipes";
 import {
   addDietType,
@@ -16,7 +12,11 @@ import {
   reset,
   setOrderBy,
 } from "../redux/actions/sortAndFilter";
-import Inputs from "../components/Filters/Inputs";
+import Card from "../components/card/Card";
+import Inputs from "../components/filters/Inputs";
+import Header from "../components/header/Header";
+import Pagination from "../components/pagination/Pagination";
+import Filters from "../components/filters/Filters";
 
 export default function Home() {
   const dispatch = useDispatch();
