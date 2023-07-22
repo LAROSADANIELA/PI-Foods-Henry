@@ -8,50 +8,52 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 25vh;
   width: 100%;
   padding-top: 4rem;
 }
-.divTex {
+.sectionParrafo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25vh;
+  width: 100%;
   font-family: "Poppins", sans-serif;
-  font-size: 4rem;
+  font-size: 55px;
   color: #6e8c03;
+  text-shadow: 1px 2px 2px rgb(250, 247, 247);
   margin: 0, 0;
   padding: 0;
   position: absolute;
-  left: 5%;
+  margin-top: -300px;
 }
-.divTex2 {
-  font-family: "Poppins", sans-serif;
-  font-size: 4rem;
-  color: #6e8c03;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 5%;
-}
+
 .divImg img {
-  width: 55%;
+  width: 45%;
   float: right;
+  margin-top: -850px;
 }
 .divImg2 img {
-  width: 55%;
+  width: 35%;
   float: left;
+  margin-top: -463px;
+  margin-bottom: 0;
+  overflow: hidden;
 }
 
 /*Animacion del titulo*/
 .conText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: -150px;
 }
 .h1 {
+  float: left;
   font-family: "Poppins", sans-serif;
   font-size: 140px;
   color: #d97904;
   margin: 20vh;
   letter-spacing: 35px;
   position: relative;
+
   &:before {
     content: "Hello!";
     position: absolute;
@@ -85,12 +87,11 @@ body {
 }
 
 .button {
-  position: absolute;
-  left: 5%;
   font-family: "Rubik", sans-serif;
-  font-size: 30px;
+  font-size: 50px;
   padding: 10px;
   margin: 20px;
+  margin-top: 40px;
   width: 350px;
   cursor: pointer;
   background: #f2f2f2;
