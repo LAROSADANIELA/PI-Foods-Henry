@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./pages.module.css";
-import comida1 from "../assets/img/comida1.png";
+import img from "../assets/img/img.png";
 import comida2 from "../assets/img/comida2.png";
 import comida3 from "../assets/img/comida3.png";
 
@@ -18,9 +18,6 @@ export default function Landing() {
             Search, create and share recipes.
           </h2>
         </div>
-        {/* <div className={styles.divImg}>
-          <img src={comida1} alt="comida1" data-animation="fade" />
-        </div> */}
       </section>
 
       <div className={styles.divImg2}>
@@ -30,16 +27,21 @@ export default function Landing() {
       <div className={styles.divImg}>
         <img src={comida3} alt="comida3" data-animation="up" />
       </div>
+      <div className={styles.pie}>
+        <div className={styles.logo}>
+          <img src={img} alt="comida1" data-animation="fade" />
+        </div>
 
-      <div className={styles.start}>
-        <Link
-          to={"/home"}
-          style={{
-            textDecoration: "none",
-          }}
-        >
-          <button className={styles.button}>Let start!</button>
-        </Link>
+        <div className={styles.start}>
+          <Link
+            to={"/home"}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <button className={styles.button}>Let start!</button>
+          </Link>
+        </div>
       </div>
     </>
   );
