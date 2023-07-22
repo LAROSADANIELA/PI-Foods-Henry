@@ -1,31 +1,5 @@
 import { RecipeApi } from "../../services/api/instance";
 
-//TIPOS
-// type recipeApi = {
-//   name: string;
-//   vegetarian: boolean;
-//   vegan: boolean;
-//   glutenFree: boolean;
-//   dairyFree: boolean;
-//   image: string;
-//   idApi: number;
-//   healthScore: number;
-//   diets: [];
-//   types: [];
-//   summary: string;
-//   steps: string;
-// };
-
-// type recipeBD = {
-//   id: string;
-//   title: string;
-//   summary: string;
-//   healthScore: number;
-//   image: string;
-//   steps: string;
-//   diets: [];
-// };
-
 //ACCIONES GET RECIPE BY ID
 export const GET_RECIPE_ID_REQUEST = "RECIPE/GET_RECIPE_ID_REQUEST";
 export const getRecipeIdRequest = () => ({
