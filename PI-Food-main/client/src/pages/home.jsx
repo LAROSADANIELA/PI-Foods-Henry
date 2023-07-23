@@ -74,6 +74,7 @@ export default function Home() {
     if (title) {
       dispatch(getRecipes(title));
     }
+    setTitle("");
   };
 
   //Paginacion
