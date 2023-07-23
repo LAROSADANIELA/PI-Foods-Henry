@@ -3,6 +3,7 @@ import {
   DESCENDENT,
   HS_ASCENDENT,
   HS_DESCENDENT,
+  ORIGIN_DB,
 } from "./constants";
 
 const defaultFilters = {
@@ -18,15 +19,14 @@ function filterRecipes(recipes, filters = defaultFilters) {
       return recipe.diets.some((type) => filters.diets.includes(type));
     });
   }
-
-  if (filters.origin) {
-    if (filters.origin === "DB") {
-      recipes = recipes.filter((recipe) => {
-        return recipe.dataBase;
-      });
-    } else if (filters.origin === "API") {
-      return recipes;
-    }
+  //FILTRA UNICAMENTE SI SELECCIONO 1 DE LOS DOS, si selecciono 0 no filtro, si elecciono 2 no filtro
+  if (filters.origin && filters.origin.length === 1) {
+    const selectedOrigin = filters.origin[0];
+    recipes = recipes.filter((recipe) => {
+      return selectedOrigin === ORIGIN_DB
+        ? recipe?.dataBase
+        : !recipe?.dataBase;
+    });
   }
 
   return recipes;

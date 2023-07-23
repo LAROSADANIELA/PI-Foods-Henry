@@ -8,6 +8,8 @@ import {
   DESCENDENT,
   HS_ASCENDENT,
   HS_DESCENDENT,
+  ORIGIN_API,
+  ORIGIN_DB,
 } from "../../utils/recipes/constants";
 
 export default function Filters({
@@ -15,7 +17,6 @@ export default function Filters({
   onSelectOrigin,
   onSelectOrder,
   onClick,
-  isChecked,
 }) {
   const { diets, loading, error } = useSelector((state) => state.diets);
   const { dietsTypes, origin, orderBy } = useSelector(
@@ -51,21 +52,23 @@ export default function Filters({
           <h5>Origin</h5>
           <div>
             <input
+              checked={origin.includes(ORIGIN_API)}
               onChange={onSelectOrigin}
               type="checkbox"
-              name="DB"
-              value="DB"
-              id="DB"
+              name={ORIGIN_API}
+              value={ORIGIN_API}
+              id={ORIGIN_API}
             />
             Data Base
           </div>
           <div>
             <input
+              checked={origin.includes(ORIGIN_DB)}
               onChange={onSelectOrigin}
               type="checkbox"
-              name="API"
-              value="API"
-              id="API"
+              name={ORIGIN_DB}
+              value={ORIGIN_DB}
+              id={ORIGIN_DB}
             />
             API Spoonocular
           </div>

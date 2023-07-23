@@ -9,28 +9,31 @@ import {
 
 const initialState = {
   dietsTypes: [],
-  origin: "",
+  origin: [],
   orderBy: null,
 };
 
 function sortAndFilterReducer(state = initialState, action) {
-  const dietsTypes = state.dietsTypes;
-
   switch (action.type) {
     case ADD_DIET_TYPE:
-      return { ...state, dietsTypes: dietsTypes.concat(action.payload) };
+      return { ...state, dietsTypes: state.dietsTypes.concat(action.payload) };
     case REMOVE_DIET_TYPE:
       return {
         ...state,
-        dietsTypes: dietsTypes.filter((type) => {
+        dietsTypes: state.dietsTypes.filter((type) => {
           return type !== action.payload;
         }),
       };
 
     case ADD_ORIGIN:
-      return { ...state, origin: action.payload };
+      return { ...state, origin: state.origin.concat(action.payload) };
     case REMOVE_ORIGIN:
-      return { ...state, origin: action.payload };
+      return {
+        ...state,
+        origin: state.origin.filter((orig) => {
+          return orig !== action.payload;
+        }),
+      };
     case SET_ORDER_BY:
       return { ...state, orderBy: action.payload };
     case RESET:

@@ -45,7 +45,7 @@ export default function Home() {
     if (e.target.checked) {
       dispatch(addOrigin(e.target.value));
     } else {
-      dispatch(removeOrigin(null));
+      dispatch(removeOrigin(e.target.value));
     }
   }
   //order
@@ -55,10 +55,6 @@ export default function Home() {
   //reset
   function handleReset() {
     dispatch(reset());
-  }
-
-  function isChecked(dietsTypes, e) {
-    dietsTypes.includes(e.target.value);
   }
 
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
@@ -127,7 +123,6 @@ export default function Home() {
             onSelectTypes={handleSelectTypes}
             onSelectOrigin={handleSelectOrigin}
             onClick={(e) => handleReset(e)}
-            isChecked={isChecked}
           />
         </div>
         <div className={style.containerHome}>
