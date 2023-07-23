@@ -59,7 +59,7 @@ export default function Filters({
               value={ORIGIN_API}
               id={ORIGIN_API}
             />
-            Data Base
+            API Spoonocular
           </div>
           <div>
             <input
@@ -70,7 +70,7 @@ export default function Filters({
               value={ORIGIN_DB}
               id={ORIGIN_DB}
             />
-            API Spoonocular
+            Data Base
           </div>
         </div>
         <div>
