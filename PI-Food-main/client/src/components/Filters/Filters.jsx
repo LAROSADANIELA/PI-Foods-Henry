@@ -15,8 +15,12 @@ export default function Filters({
   onSelectOrigin,
   onSelectOrder,
   onClick,
+  isChecked,
 }) {
   const { diets, loading, error } = useSelector((state) => state.diets);
+  const { dietsTypes, origin, orderBy } = useSelector(
+    (state) => state.sortAndFilter
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,11 +35,16 @@ export default function Filters({
         <div>
           <h5>Filter by</h5>
           <h5>Types</h5>
-          {types.map((d) => {
+          {types.map((type) => {
             return (
               <div>
-                <input onChange={onSelectTypes} type="checkbox" value={d} />
-                {d}
+                <input
+                  checked={dietsTypes.includes(type)}
+                  onChange={onSelectTypes}
+                  type="checkbox"
+                  value={type}
+                />
+                {type}
               </div>
             );
           })}

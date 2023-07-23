@@ -57,6 +57,10 @@ export default function Home() {
     dispatch(reset());
   }
 
+  function isChecked(dietsTypes, e) {
+    dietsTypes.includes(e.target.value);
+  }
+
   const sorterAndFiltered = sortAndFilterRecipes(recipes, {
     orderBy,
     filters: {
@@ -104,39 +108,6 @@ export default function Home() {
   if (error) return <p>Error: {error}</p>;
   if (!recipes || recipes.length < 1) return <p>Error: {error}</p>;
 
-  // function ComponentePrincipal() {
-  //   return sorterAndFiltered.length >= 1 ? <ComponenteA /> : <ComponenteB />;
-  // }
-
-  // function ComponenteA() {
-  //   return sorterAndFiltered
-  //     .map((recipe, i) => {
-  //       return (
-  //         <Link
-  //           style={{
-  //             textDecoration: "none",
-  //           }}
-  //           to={`/recipes/${recipe.id}`}
-  //           key={i}
-  //         >
-  //           <Card
-  //             image={recipe.image}
-  //             title={recipe.title}
-  //             healthScore={recipe.healthScore}
-  //             name={recipe.diets.map((name) => {
-  //               return name;
-  //             })}
-  //           />
-  //         </Link>
-  //       );
-  //     })
-  //     .slice(firstIndex, lastIndex);
-  // }
-
-  // function ComponenteB() {
-  //   return sorterAndFiltered.msg;
-  // }
-
   return (
     <>
       <div className={style.nav}>
@@ -156,6 +127,7 @@ export default function Home() {
             onSelectTypes={handleSelectTypes}
             onSelectOrigin={handleSelectOrigin}
             onClick={(e) => handleReset(e)}
+            isChecked={isChecked}
           />
         </div>
         <div className={style.containerHome}>
