@@ -73,7 +73,8 @@ export default function Filters({
         <div>
           <h5>Order By</h5>
           <select
-            defaultValue={{ label: "Select Order", value: 0 }}
+            value={orderBy}
+            defaultValue={undefined}
             onChange={onSelectOrder}
           >
             <option value={ASCENDENT}>A-Z</option>
