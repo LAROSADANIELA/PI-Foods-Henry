@@ -121,12 +121,12 @@ const busqueda = async (title) => {
 const getAll = async (req, res) => {
   const { title } = req.query;
   if (title) {
-    if (title) {
-      const resutadoBusqueda = await busqueda(title);
+    const resutadoBusqueda = await busqueda(title);
+    if (resutadoBusqueda.length !== 0) {
       res.status(200).json(resutadoBusqueda);
-      console.log(resutadoBusqueda, "busqueda");
+      // console.log(resutadoBusqueda, "busqueda");
     } else {
-      res.status(404).send({ msg: "No se encontro receta" });
+      res.send({ msg: "No se encontro receta" });
     }
   } else {
     const data = await recipesAll();
