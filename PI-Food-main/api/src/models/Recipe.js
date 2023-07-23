@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       dataBase: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: "dataBase",
+        defaultValue: true,
       },
       title: {
         type: DataTypes.STRING,
