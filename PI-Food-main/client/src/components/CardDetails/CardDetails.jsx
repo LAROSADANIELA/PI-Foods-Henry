@@ -19,8 +19,14 @@ export default function CardDetails({
         <ul>
           <li>{name}</li>
         </ul>
-        <p>{summary}</p>
-        <p>{steps}</p>
+        <p
+        // dangerouslySetInnerHTML={{ __html:  }}
+        >
+          {summary}
+        </p>
+        <p>
+          Steps <br /> {steps}
+        </p>
         <Link to={"/home"}>
           <Button label="Back" />
         </Link>

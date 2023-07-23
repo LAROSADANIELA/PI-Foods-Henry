@@ -18,15 +18,8 @@ const getRecipesApi = async () => {
       return {
         id: e.id,
         title: e.title,
-        summary: e.summary,
         healthScore: e.healthScore,
         image: e.image,
-        steps:
-          e.analyzedInstructions[0] && e.analyzedInstructions[0].steps
-            ? e.analyzedInstructions[0].steps
-                .map((item) => item.step)
-                .join(" \n")
-            : "",
         diets: e.diets?.map((diet) => diet),
       };
     });
@@ -160,20 +153,22 @@ const searchById = async (req, res) => {
         `/${id}/information?apiKey=${FOOD_API_KEY}`
       );
       console.log(recipeApi, "recipeApi");
+      const regex = /(<([^>]+)>)/gi; // Expresión regular para eliminar las etiquetas HTML
 
       serchrIdApi = {
         title: recipeApi.data.title,
-        vegetarian: recipeApi.data.vegetarian,
-        vegan: recipeApi.data.vegan,
-        glutenFree: recipeApi.data.glutenFree,
-        dairyFree: recipeApi.data.dairyFree,
         image: recipeApi.data.image,
         idApi: recipeApi.data.id,
         healthScore: recipeApi.data.healthScore,
         diets: recipeApi.data.diets?.map((element) => element),
         types: recipeApi.data.dishTypes?.map((element) => element),
-        summary: recipeApi.data.summary,
-        steps: recipeApi.data.instructions,
+        summary: recipeApi.data.summary.replace(regex, ""),
+        steps: recipeApi.data.analyzedInstructions[0]?.steps.map((e) => {
+          return {
+            number: e.number,
+            step: e.step,
+          };
+        }),
       };
       return res.send(serchrIdApi);
     } else {

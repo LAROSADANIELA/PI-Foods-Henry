@@ -15,6 +15,9 @@ export default function Detail() {
 
   console.log(recipeId, "receta");
 
+  // const regex = /(<([^>]+)>)/gi; // Expresión regular para eliminar las etiquetas HTML
+  // let summaryLimpio = recipeId.summary.replace(regex, "");
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!recipeId) return <p>No recipe</p>;
@@ -27,8 +30,13 @@ export default function Detail() {
         return name;
       })}
       healthScore={recipeId.healthScore}
+      // summary={summaryLimpio}
       summary={recipeId.summary}
-      steps={recipeId.steps}
+      steps={recipeId.steps?.map((e) => (
+        <p key={e.number}>
+          <strong>{e.number}</strong> - {e.step}
+        </p>
+      ))}
     />
   );
 }
