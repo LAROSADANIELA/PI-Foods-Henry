@@ -64,12 +64,12 @@ export default function Home() {
       origin,
     },
   });
-  console.log("sorterAndFiltered", sorterAndFiltered);
+
   //Busqueda por title
   function handleSearch(e) {
     setTitle(e.target.value);
   }
-  // console.log(title, "titulo");
+
   const handleSumitSearch = (e) => {
     e.preventDefault();
     if (title) {

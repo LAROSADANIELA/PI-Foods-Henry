@@ -61,7 +61,6 @@ export default function Create() {
     image: "",
     diet: [],
   });
-  // console.log(recipe.diet.length, "receta creada");
 
   function handleChange(e) {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
@@ -74,7 +73,7 @@ export default function Create() {
 
     if (Object.keys(err).length === 0) {
       dispatch(postRecipe(recipe));
-      // console.log("Enviando formulario");
+
       alert("Receta creada");
     }
     setRecipe({
@@ -86,7 +85,6 @@ export default function Create() {
       diet: [],
     });
   }
-  console.log(recipe, "Receta creada");
 
   //Mensaje para no repetir tipos de dietas
   function handleSelect(e) {

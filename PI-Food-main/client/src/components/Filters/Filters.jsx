@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import style from "./filters.module.css";
-import Button2 from "../buttonWhite/Button2";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getDiets } from "../../redux/actions/diets";
 import {
   ASCENDENT,
@@ -11,6 +9,8 @@ import {
   ORIGIN_API,
   ORIGIN_DB,
 } from "../../utils/recipes/constants";
+import Button2 from "../buttonWhite/Button2";
+import style from "./filters.module.css";
 
 export default function Filters({
   onSelectTypes,
@@ -18,7 +18,7 @@ export default function Filters({
   onSelectOrder,
   onClick,
 }) {
-  const { diets, loading, error } = useSelector((state) => state.diets);
+  const { diets } = useSelector((state) => state.diets);
   const { dietsTypes, origin, orderBy } = useSelector(
     (state) => state.sortAndFilter
   );
@@ -28,7 +28,6 @@ export default function Filters({
     dispatch(getDiets());
   }, []);
   const types = diets.map((d) => d.name);
-  console.log(types);
 
   return (
     <>

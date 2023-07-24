@@ -35,8 +35,6 @@ export function getRecipes(title) {
         },
       });
       dispatch(getRecipesSuccess(response.data));
-      // console.log(response, "dataAll");
-      // };
     } catch (error) {
       dispatch(getRecipesFailure(error.message));
       console.log(error);

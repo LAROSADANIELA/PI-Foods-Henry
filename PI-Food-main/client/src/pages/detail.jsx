@@ -13,8 +13,6 @@ export default function Detail() {
     dispatch(getRecipeId(id));
   }, []);
 
-  console.log(recipeId, "receta");
-
   // const regex = /(<([^>]+)>)/gi; // Expresión regular para eliminar las etiquetas HTML
   // let summaryLimpio = recipeId.summary.replace(regex, "");
 

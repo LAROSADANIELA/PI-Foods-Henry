@@ -12,8 +12,6 @@ const defaultFilters = {
 };
 
 function filterRecipes(recipes, filters = defaultFilters) {
-  console.log("filters", filters.diets);
-
   if (filters.diets && filters.diets.length) {
     recipes = recipes.filter((recipe) => {
       return recipe.diets.some((type) => filters.diets.includes(type));
