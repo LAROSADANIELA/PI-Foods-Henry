@@ -23,7 +23,7 @@ export const removeOrigin = (origin) => {
     payload: origin,
   };
 };
-//fn que devueven acciones
+
 export const SET_ORDER_BY = "SET_ORDER_BY";
 export const setOrderBy = (orderBy) => {
   return {

@@ -1,12 +1,5 @@
 import { RecipeApi } from "../../services/api/instance";
 
-//TIPOS
-// type dietsModel = {
-//   id: string;
-//   name: string;
-// };
-// type arrDiets = Array<dietsModel>;
-
 //ACCIONES GET ALL DIETS
 
 export const GET_DIETS_REQUEST = "DIETS/GET_DIETS_REQUEST";

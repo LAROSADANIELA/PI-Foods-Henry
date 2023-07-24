@@ -21,15 +21,15 @@ export default function Landing() {
       </section>
 
       <div className={styles.divImg2}>
-        <img src={comida2} alt="comida2" data-animation="show" />
+        <img src={comida2} alt="comida2" />
       </div>
 
       <div className={styles.divImg}>
-        <img src={comida3} alt="comida3" data-animation="up" />
+        <img src={comida3} alt="comida3" />
       </div>
       <div className={styles.pie}>
         <div className={styles.logo}>
-          <img src={img} alt="comida1" data-animation="fade" />
+          <img src={img} alt="logoGreen" />
         </div>
 
         <div className={styles.start}>

@@ -11,48 +11,6 @@ import styles from "./pages.module.css";
 export default function Create() {
   const { diets, loading, error } = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
-
-  function validate(recipe) {
-    let errors = {};
-    let validateTitle = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/; // Valida Title: Letras mayúsculas o minúsculas y espacios, pueden llevar acentos.
-    let validateSS = /^[\wáéíóúÁÉÍÓÚñÑ\s\d.,;:!?"'(){}[\]-]{1,500}$/; //Valida summary y Steps: Puede contener letras mayúsculas o minúsculas, espacios, acentos y números.
-    let validateScore = /^(?:100|[1-9]\d|\d)$/; // Valida heaktScore: debe ser un numero entre 1 y 100
-
-    if (!recipe.title.trim()) {
-      errors.title = "Title is require";
-    } else if (!validateTitle.test(recipe.title)) {
-      errors.title = "the title field only accepts letters and spaces";
-    }
-    if (!recipe.summary.trim()) {
-      errors.summary = "Summary is require";
-    } else if (!validateSS.test(recipe.summary)) {
-      errors.summary = "The text must not contain more than 500 characters";
-    }
-    if (!recipe.steps.trim()) {
-      errors.steps = "steps is require";
-    } else if (!validateSS.test(recipe.steps)) {
-      errors.steps = "The text must not contain more than 500 characters";
-    }
-    if (!recipe.healthScore) {
-      errors.healthScore = "Health Score is require";
-    } else if (!validateScore.test(recipe.healthScore)) {
-      errors.healthScore = "You must enter a value between 1 and 100";
-    }
-    if (!recipe.image) {
-      errors.image = "Image is require";
-    }
-    if (recipe.diet.length <= 0) {
-      errors.diet = "Diet is require";
-    }
-    return errors;
-  }
-
-  const dispatch = useDispatch();
-  // Llamo a la funcion getDiets
-  useEffect(() => {
-    dispatch(getDiets());
-  }, [dispatch]);
-  //Receta que recibo por body
   const [recipe, setRecipe] = useState({
     title: "",
     summary: "",
@@ -61,6 +19,12 @@ export default function Create() {
     image: "",
     diet: [],
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDiets());
+  }, []);
 
   function handleChange(e) {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
@@ -104,6 +68,41 @@ export default function Create() {
       ...prev,
       diet: prev.diet.filter((dietTypes) => dietTypes !== d),
     }));
+  }
+
+  function validate(recipe) {
+    let errors = {};
+    let validateTitle = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/; // Valida Title: Letras mayúsculas o minúsculas y espacios, pueden llevar acentos.
+    let validateSS = /^[\wáéíóúÁÉÍÓÚñÑ\s\d.,;:!?"'(){}[\]-]{1,500}$/; //Valida summary y Steps: Puede contener letras mayúsculas o minúsculas, espacios, acentos y números.
+    let validateScore = /^(?:100|[1-9]\d|\d)$/; // Valida heaktScore: debe ser un numero entre 1 y 100
+
+    if (!recipe.title.trim()) {
+      errors.title = "Title is require";
+    } else if (!validateTitle.test(recipe.title)) {
+      errors.title = "the title field only accepts letters and spaces";
+    }
+    if (!recipe.summary.trim()) {
+      errors.summary = "Summary is require";
+    } else if (!validateSS.test(recipe.summary)) {
+      errors.summary = "The text must not contain more than 500 characters";
+    }
+    if (!recipe.steps.trim()) {
+      errors.steps = "steps is require";
+    } else if (!validateSS.test(recipe.steps)) {
+      errors.steps = "The text must not contain more than 500 characters";
+    }
+    if (!recipe.healthScore) {
+      errors.healthScore = "Health Score is require";
+    } else if (!validateScore.test(recipe.healthScore)) {
+      errors.healthScore = "You must enter a value between 1 and 100";
+    }
+    if (!recipe.image) {
+      errors.image = "Image is require";
+    }
+    if (recipe.diet.length <= 0) {
+      errors.diet = "Diet is require";
+    }
+    return errors;
   }
 
   if (loading) return <p>Loading...</p>;
