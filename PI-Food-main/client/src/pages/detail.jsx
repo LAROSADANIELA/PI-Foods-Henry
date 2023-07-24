@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipeId } from "../redux/actions/searchRecipeById";
 import { useParams } from "react-router-dom";
 import CardDetails from "../components/cardDetails/CardDetails";
+import { getRecipeId } from "../redux/actions/searchRecipeById";
 
 export default function Detail() {
   const { recipeId, loading, error } = useSelector((state) => state.getId);
@@ -12,9 +12,6 @@ export default function Detail() {
   useEffect(() => {
     dispatch(getRecipeId(id));
   }, []);
-
-  // const regex = /(<([^>]+)>)/gi; // Expresión regular para eliminar las etiquetas HTML
-  // let summaryLimpio = recipeId.summary.replace(regex, "");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -28,7 +25,6 @@ export default function Detail() {
         return name;
       })}
       healthScore={recipeId.healthScore}
-      // summary={summaryLimpio}
       summary={recipeId.summary}
       steps={recipeId.steps?.map((e) => (
         <p key={e.number}>

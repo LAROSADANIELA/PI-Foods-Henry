@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "./pages.module.css";
-import img from "../assets/img/img.png";
 import comida2 from "../assets/img/comida2.png";
 import comida3 from "../assets/img/comida3.png";
+import img from "../assets/img/img.png";
+import styles from "./pages.module.css";
 
 export default function Landing() {
   return (
