@@ -31,7 +31,7 @@ const populateDBWithDiet = async () => {
     let b = new Set(a);
     let c = [...b];
     let dietsTypes = c.filter((e) => e !== "").slice(1);
-    // console.log(dietsTypes, "dietsTypes");
+
     dietsTypes.map((diet) => Diet.findOrCreate({ where: { name: diet } }));
     console.log("populateDBWithDiet");
   } catch (error) {

@@ -84,7 +84,7 @@ const recipeNameApi = async (title) => {
       const searchNameApi = await infoD.filter((e) =>
         e.title.toLowerCase().includes(title.toLowerCase())
       );
-      console.log(searchNameApi, "searchNameApi");
+
       return searchNameApi;
     }
   } catch (error) {
@@ -99,7 +99,7 @@ const recipeNameBD = async (title) => {
       const searchNameBD = await searchAllBD.filter((e) =>
         e.title.toLowerCase().includes(title.toLowerCase())
       );
-      console.log(searchNameBD, "searchNameBD");
+
       return searchNameBD;
     }
   } catch (error) {
@@ -124,7 +124,6 @@ const getAll = async (req, res) => {
     const resutadoBusqueda = await busqueda(title);
     if (resutadoBusqueda.length !== 0) {
       res.status(200).json(resutadoBusqueda);
-      // console.log(resutadoBusqueda, "busqueda");
     } else {
       res.send({ msg: "No se encontro receta" });
     }
@@ -152,7 +151,7 @@ const searchById = async (req, res) => {
       const recipeApi = await FoodAPI.get(
         `/${id}/information?apiKey=${FOOD_API_KEY}`
       );
-      console.log(recipeApi, "recipeApi");
+
       const regex = /(<([^>]+)>)/gi; // Expresión regular para eliminar las etiquetas HTML
 
       serchrIdApi = {
@@ -182,7 +181,7 @@ const searchById = async (req, res) => {
           },
         },
       });
-      console.log(recipeBD, "recipeBD");
+
       searchIdBD = {
         id: recipeBD.dataValues.id,
         dataBase: recipeBD.dataValues.dataBase,
@@ -193,7 +192,7 @@ const searchById = async (req, res) => {
         steps: recipeBD.dataValues.steps,
         diets: recipeBD.diets?.map((diet) => diet.dataValues.name),
       };
-      console.log(searchIdBD, "busqueda de BD");
+
       return res.send(searchIdBD);
     }
   } catch (error) {
@@ -220,7 +219,6 @@ const recipePost = async (req, res) => {
     });
     newRecipe.addDiet(dietTypesRecipeDb);
     res.status(200).send(newRecipe);
-    console.log("first", newRecipe);
   } catch (error) {
     res.send(error);
   }
