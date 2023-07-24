@@ -1,10 +1,10 @@
 import {
   ADD_DIET_TYPE,
-  REMOVE_DIET_TYPE,
   ADD_ORIGIN,
+  REMOVE_DIET_TYPE,
   REMOVE_ORIGIN,
-  SET_ORDER_BY,
   RESET,
+  SET_ORDER_BY,
 } from "../actions/sortAndFilter";
 
 const initialState = {

@@ -1,7 +1,7 @@
 import {
+  GET_RECIPES_FAILURE,
   GET_RECIPES_REQUEST,
   GET_RECIPES_SUCCESS,
-  GET_RECIPES_FAILURE,
   SET_PAGE,
 } from "../actions/recipes";
 

@@ -1,7 +1,7 @@
 import {
+  GET_RECIPE_ID_FAILURE,
   GET_RECIPE_ID_REQUEST,
   GET_RECIPE_ID_SUCCESS,
-  GET_RECIPE_ID_FAILURE,
 } from "../actions/searchRecipeById";
 
 const initialState = {

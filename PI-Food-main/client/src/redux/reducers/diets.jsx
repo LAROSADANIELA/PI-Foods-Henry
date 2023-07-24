@@ -1,7 +1,7 @@
 import {
+  GET_DIETS_FAILURE,
   GET_DIETS_REQUEST,
   GET_DIETS_SUCCESS,
-  GET_DIETS_FAILURE,
 } from "../actions/diets";
 
 const initialState = {
