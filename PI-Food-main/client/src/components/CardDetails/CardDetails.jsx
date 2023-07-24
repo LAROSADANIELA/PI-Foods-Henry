@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./cardDetails.module.css";
 import Button from "../buttonBlack/Button";
+import styles from "./cardDetails.module.css";
 
 export default function CardDetails({
   title,

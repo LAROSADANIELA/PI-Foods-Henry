@@ -1,6 +1,6 @@
-import styles from "./filters.module.css";
-import { Link } from "react-router-dom";
 import { HiSearch } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import styles from "./filters.module.css";
 
 export default function Inputs({ value, onchange, onClick, placeholder }) {
   return (

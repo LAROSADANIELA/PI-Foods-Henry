@@ -1,7 +1,7 @@
 import React from "react";
 
-import styles from "./header.module.css";
 import image from "../../assets/img/logoHome.png";
+import styles from "./header.module.css";
 
 export default function Header() {
   return (
