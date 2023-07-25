@@ -79,12 +79,15 @@ export default function Home() {
   }
 
   //Paginacion
-  const size = pagination.size; //9
   const lastIndex = pagination.page * pagination.size; //1*9
   const firstIndex = lastIndex - pagination.size; // 9-9
 
   const pageNumber = []; //nro de paginas
-  for (let i = 1; i <= Math.ceil(sorterAndFiltered.length / size); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(sorterAndFiltered.length / pagination.size);
+    i++
+  ) {
     pageNumber.push(i);
   }
   const handleNextClick = () => {
