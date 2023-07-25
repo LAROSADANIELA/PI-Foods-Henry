@@ -158,9 +158,12 @@ export default function Home() {
         <Pagination
           handleNextClick={handleNextClick}
           handlePrevClick={handlePrevClick}
-          nroPage={pageNumber?.map((nro) => {
+          nroPage={pageNumber?.map((nro, i) => {
             return (
-              <span style={nro == pagination.page ? { color: "#6E8C03" } : {}}>
+              <span
+                key={i}
+                style={nro == pagination.page ? { color: "#6E8C03" } : {}}
+              >
                 {nro}&nbsp;
               </span>
             );

@@ -35,9 +35,9 @@ export default function Filters({
         <div>
           <h5>Filter by</h5>
           <h5>Types</h5>
-          {types.map((type) => {
+          {types.map((type, i) => {
             return (
-              <div>
+              <div key={i}>
                 <input
                   checked={dietsTypes.includes(type)}
                   onChange={onSelectTypes}
