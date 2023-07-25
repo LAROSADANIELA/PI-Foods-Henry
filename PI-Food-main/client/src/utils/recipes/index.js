@@ -8,7 +8,7 @@ import {
 
 const defaultFilters = {
   diets: [],
-  origin: "",
+  origin: [],
 };
 
 function filterRecipes(recipes, filters = defaultFilters) {
@@ -19,6 +19,7 @@ function filterRecipes(recipes, filters = defaultFilters) {
   }
   //FILTRA UNICAMENTE SI SELECCIONO 1 DE LOS DOS, si selecciono 0 no filtro, si elecciono 2 no filtro
   if (filters.origin && filters.origin.length === 1) {
+    //["API"]
     const selectedOrigin = filters.origin[0];
     recipes = recipes.filter((recipe) => {
       return selectedOrigin === ORIGIN_DB

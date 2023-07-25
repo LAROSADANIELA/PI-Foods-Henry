@@ -19,11 +19,7 @@ export default function CardDetails({
         <ul>
           <li>{name}</li>
         </ul>
-        <p
-        // dangerouslySetInnerHTML={{ __html:  }}
-        >
-          {summary}
-        </p>
+        <p>{summary}</p>
         <p>
           Steps <br /> {steps}
         </p>

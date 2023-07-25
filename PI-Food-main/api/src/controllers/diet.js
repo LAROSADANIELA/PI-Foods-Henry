@@ -15,22 +15,17 @@ const getDietsBD = async (req, res) => {
 // En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular acá
 
 const populateDBWithDiet = async () => {
-  const recipes = await getRecipesApi();
   try {
-    const types = await recipes.map((recipe) => {
+    const recipes = await getRecipesApi();
+    const types = recipes.map((recipe) => {
       return {
         diets: recipe.diets,
       };
     });
 
-    let a = types
-      .map((e) => Object.values(e))
-      .flat()
-      .join(",")
-      .split(",");
-    let b = new Set(a);
-    let c = [...b];
-    let dietsTypes = c.filter((e) => e !== "");
+    let flattened = types.map((e) => Object.values(e)).flat(2);
+    let uniqueValues = [...new Set(flattened)]; //elimina duplicados
+    let dietsTypes = uniqueValues.filter((e) => e !== "");
 
     dietsTypes.map((diet) => Diet.findOrCreate({ where: { name: diet } }));
     console.log("populateDBWithDiet");

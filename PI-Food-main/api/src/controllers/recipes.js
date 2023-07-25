@@ -1,8 +1,6 @@
-const { Router } = require("express");
 const { Recipe, Diet } = require("../db.js");
 const { FoodAPI } = require("../services/axios/instance");
-const { default: axios } = require("axios");
-const { FOOD_API_KEY, API_BASE_URL } = process.env;
+const { FOOD_API_KEY } = process.env;
 
 //`https://api.spoonacular.com/recipes/complexSearch?apiKey=${FOOD_API_KEY}&number=100&addRecipeInformation=true`
 //https://api.spoonacular.com/recipes/715415/information?apiKey=305fe584bb3b49f29d95d9dd1d1682cd
@@ -20,7 +18,7 @@ const getRecipesApi = async () => {
         title: e.title,
         healthScore: e.healthScore,
         image: e.image,
-        diets: e.diets?.map((diet) => diet),
+        diets: e.diets,
       };
     });
 
@@ -62,9 +60,9 @@ const getRecipesDB = async () => {
 };
 
 const recipesAll = async () => {
-  const api = await getRecipesApi();
-  const BD = await getRecipesDB();
   try {
+    const api = await getRecipesApi();
+    const BD = await getRecipesDB();
     const allData = await api.concat(BD);
 
     return allData;
@@ -107,33 +105,33 @@ const recipeNameBD = async (title) => {
   }
 };
 
-const busqueda = async (title) => {
-  const api = await recipeNameApi(title);
-  const BD = await recipeNameBD(title);
+const searchByTitle = async (title) => {
   try {
-    const infoTotal = await api.concat(BD);
-    return infoTotal;
+    const api = await recipeNameApi(title);
+    const BD = await recipeNameBD(title);
+    const dataAll = await api.concat(BD);
+    return dataAll;
   } catch (error) {
     return "error EN COCATENAR";
   }
 };
 
 const getAll = async (req, res) => {
-  const { title } = req.query;
-  if (title) {
-    const resutadoBusqueda = await busqueda(title);
-    if (resutadoBusqueda.length !== 0) {
-      res.status(200).json(resutadoBusqueda);
+  try {
+    const { title } = req.query;
+    if (title) {
+      const respSearch = await searchByTitle(title);
+      if (respSearch.length !== 0) {
+        res.status(200).json(respSearch);
+      } else {
+        res.send({ msg: "No se encontro receta" });
+      }
     } else {
-      res.send({ msg: "No se encontro receta" });
-    }
-  } else {
-    const data = await recipesAll();
-    try {
+      const data = await recipesAll();
       res.status(200).json(data);
-    } catch (error) {
-      res.status(404).send({ msg: "No se pueden mostrar recetas" });
     }
+  } catch (error) {
+    res.status(404).send({ msg: "No se pueden mostrar recetas" });
   }
 };
 
@@ -143,10 +141,10 @@ const getAll = async (req, res) => {
 // Incluir los tipos de dieta asociados
 
 const searchById = async (req, res) => {
-  const { id } = req.params;
-  const tipoId = isNaN(id) ? "db" : "api";
   try {
-    if (tipoId === "api") {
+    const { id } = req.params;
+    const typeId = isNaN(id) ? "db" : "api";
+    if (typeId === "api") {
       let serchrIdApi = {};
       const recipeApi = await FoodAPI.get(
         `/${id}/information?apiKey=${FOOD_API_KEY}`
@@ -205,8 +203,8 @@ const searchById = async (req, res) => {
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // Crea una receta en la base de datos relacionada con sus tipos de dietas.
 const recipePost = async (req, res) => {
-  const { title, summary, healthScore, steps, diet, image } = req.body;
   try {
+    const { title, summary, healthScore, steps, diet, image } = req.body;
     const newRecipe = await Recipe.create({
       title,
       summary,
