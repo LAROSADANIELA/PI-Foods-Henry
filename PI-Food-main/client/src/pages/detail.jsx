@@ -26,11 +26,7 @@ export default function Detail() {
       })}
       healthScore={recipeId.healthScore}
       summary={recipeId.summary}
-      steps={recipeId.steps?.map((e) => (
-        <p key={e.number}>
-          <strong>{e.number}</strong> - {e.step}
-        </p>
-      ))}
+      steps={recipeId.steps}
     />
   );
 }

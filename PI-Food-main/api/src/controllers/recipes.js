@@ -160,13 +160,11 @@ const searchById = async (req, res) => {
         diets: recipeApi.data.diets?.map((element) => element),
         types: recipeApi.data.dishTypes?.map((element) => element),
         summary: recipeApi.data.summary.replace(regex, ""),
-        steps: recipeApi.data.analyzedInstructions[0]?.steps.map((e) => {
-          return {
-            number: e.number,
-            step: e.step,
-          };
-        }),
+        steps: recipeApi.data.analyzedInstructions
+          .flatMap((instruction) => instruction.steps.map((step) => step.step))
+          .join("\n"),
       };
+
       return res.send(serchrIdApi);
     } else {
       let searchIdBD = {};
