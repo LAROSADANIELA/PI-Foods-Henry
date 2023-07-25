@@ -70,13 +70,13 @@ export default function Home() {
     setTitle(e.target.value);
   }
 
-  const handleSumitSearch = (e) => {
+  function handleSumitSearch(e) {
     e.preventDefault();
     if (title) {
       dispatch(getRecipes(title));
     }
     setTitle("");
-  };
+  }
 
   //Paginacion
   const size = pagination.size; //9
