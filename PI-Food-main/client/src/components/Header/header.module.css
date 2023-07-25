@@ -10,5 +10,11 @@
 
 .logo {
   cursor: pointer;
-  margin-left: 1100px;
+  margin-left: 300px;
+}
+
+.home {
+  color: #d97904;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
 }

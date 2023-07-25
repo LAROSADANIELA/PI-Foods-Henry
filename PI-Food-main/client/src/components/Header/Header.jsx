@@ -6,9 +6,9 @@ import styles from "./header.module.css";
 export default function Header() {
   return (
     <div className={styles.header}>
-      <a className={styles.logo} href="/home">
-        {" "}
-        <img src={image} alt="logo" width="300px" />
+      <img className={styles.logo} src={image} alt="logo" width="300px" />
+      <a className={styles.home} href="/home">
+        {"Home "}
       </a>
     </div>
   );
