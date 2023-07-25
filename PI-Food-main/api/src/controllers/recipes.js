@@ -24,7 +24,7 @@ const getRecipesApi = async () => {
 
     return infoDiets;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -55,7 +55,7 @@ const getRecipesDB = async () => {
 
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -67,7 +67,7 @@ const recipesAll = async () => {
 
     return allData;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -86,7 +86,7 @@ const recipeNameApi = async (title) => {
       return searchNameApi;
     }
   } catch (error) {
-    return "error recipeNameApi";
+    return error.message;
   }
 };
 
@@ -101,7 +101,7 @@ const recipeNameBD = async (title) => {
       return searchNameBD;
     }
   } catch (error) {
-    return "error recipeNameBD";
+    return error.message;
   }
 };
 
@@ -112,7 +112,7 @@ const searchByTitle = async (title) => {
     const dataAll = await api.concat(BD);
     return dataAll;
   } catch (error) {
-    return "error EN COCATENAR";
+    return error.message;
   }
 };
 
@@ -131,7 +131,7 @@ const getAll = async (req, res) => {
       res.status(200).json(data);
     }
   } catch (error) {
-    res.status(404).send({ msg: "No se pueden mostrar recetas" });
+    res.send(error);
   }
 };
 
@@ -192,8 +192,7 @@ const searchById = async (req, res) => {
       return res.send(searchIdBD);
     }
   } catch (error) {
-    console.log(error, "eeror");
-    res.status(500).send(error);
+    res.send(error);
   }
 };
 
