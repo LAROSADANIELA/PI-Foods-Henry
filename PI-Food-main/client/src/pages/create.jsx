@@ -11,14 +11,12 @@ import styles from "./pages.module.css";
 export default function Create() {
   const { diets, loading, error } = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
-  const [recipe, setRecipe] = useState({
-    title: "",
-    summary: "",
-    steps: "",
-    healthScore: "",
-    image: "",
-    diet: [],
-  });
+  const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
+  const [steps, setSteps] = useState("");
+  const [healthScore, setHealthScore] = useState("");
+  const [image, setImage] = useState("");
+  const [diet, setDiet] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -26,80 +24,88 @@ export default function Create() {
     dispatch(getDiets());
   }, []);
 
-  function handleChange(e) {
-    setRecipe({ ...recipe, [e.target.name]: e.target.value });
+  function handleTitle(e) {
+    setTitle(e.target.value);
   }
+  function handleSummary(e) {
+    setSummary(e.target.value);
+  }
+  function handleSteps(e) {
+    setSteps(e.target.value);
+  }
+  function handleHealthScore(e) {
+    setHealthScore(e.target.value);
+  }
+  function handleImage(e) {
+    setImage(e.target.value);
+  }
+  function handleTypes(e) {
+    if (e.target.checked) {
+      setDiet([...diet, e.target.value]);
+    }
+    if (!e.target.checked) {
+      setDiet(diet.filter((type) => type !== e.target.value));
+    }
+  }
+
+  const recipeForm = {
+    title: title,
+    summary: summary,
+    steps: steps,
+    healthScore: healthScore,
+    image: image,
+    diet: diet,
+  };
+  console.log(recipeForm, "recipefrom");
   //Sumit: verifico errores y envio formilario
   function handleSubmit(e) {
     e.preventDefault();
-    const err = validate(recipe);
+    const err = validate(recipeForm);
     setErrors(err);
 
     if (Object.keys(err).length === 0) {
-      dispatch(postRecipe(recipe));
+      dispatch(postRecipe(recipeForm));
 
       alert("Receta creada");
     }
-    setRecipe({
-      title: "",
-      summary: "",
-      steps: "",
-      healthScore: "",
-      image: "",
-      diet: [],
-    });
+    setTitle("");
+    setSummary("");
+    setSteps("");
+    setHealthScore("");
+    setImage("");
+    setDiet([]);
   }
 
-  //Mensaje para no repetir tipos de dietas
-  function handleSelect(e) {
-    if (recipe.diet.includes(e.target.value)) {
-      alert("Cannot repeat Types of Diets");
-    } else {
-      setRecipe((prev) => ({
-        ...prev,
-        diet: [...recipe.diet, e.target.value],
-      }));
-    }
-  }
-
-  //Borrar dietas seleccionadas
-  function deleteDiet(_e, d) {
-    setRecipe((prev) => ({
-      ...prev,
-      diet: prev.diet.filter((dietTypes) => dietTypes !== d),
-    }));
-  }
-
-  function validate(recipe) {
+  function validate(recipeForm) {
     let errors = {};
     let validateTitle = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/; // Valida Title: Letras mayúsculas o minúsculas y espacios, pueden llevar acentos.
     let validateSS = /^[\wáéíóúÁÉÍÓÚñÑ\s\d.,;:!?"'(){}[\]-]{1,500}$/; //Valida summary y Steps: Puede contener letras mayúsculas o minúsculas, espacios, acentos y números.
     let validateScore = /^(?:100|[1-9]\d|\d)$/; // Valida heaktScore: debe ser un numero entre 1 y 100
 
-    if (!recipe.title.trim()) {
+    if (!recipeForm.title.trim()) {
       errors.title = "Title is require";
-    } else if (!validateTitle.test(recipe.title)) {
+    } else if (!validateTitle.test(recipeForm.title)) {
       errors.title = "the title field only accepts letters and spaces";
     }
-    if (!recipe.summary.trim()) {
+    if (!recipeForm.summary.trim()) {
       errors.summary = "Summary is require";
-    } else if (!validateSS.test(recipe.summary)) {
+    } else if (!validateSS.test(recipeForm.summary)) {
       errors.summary = "The text must not contain more than 500 characters";
     }
-    if (!recipe.steps.trim()) {
+    if (!recipeForm.steps.trim()) {
       errors.steps = "steps is require";
-    } else if (!validateSS.test(recipe.steps)) {
+    } else if (!validateSS.test(recipeForm.steps)) {
       errors.steps = "The text must not contain more than 500 characters";
     }
-    if (!recipe.healthScore) {
+    if (!recipeForm.healthScore) {
       errors.healthScore = "Health Score is require";
-    } else if (!validateScore.test(recipe.healthScore)) {
+    } else if (!validateScore.test(recipeForm.healthScore)) {
       errors.healthScore = "You must enter a value between 1 and 100";
     }
-    if (!recipe.image) {
+    if (!recipeForm.image) {
       errors.image = "Image is require";
     }
-    if (recipe.diet.length <= 0) {
+    if (recipeForm.diet.length <= 0) {
       errors.diet = "Diet is require";
     }
     return errors;
@@ -117,48 +123,47 @@ export default function Create() {
           <h3 className={styles.h3}>Add new Recipe</h3>
           <div className={styles.input}>
             <Inputt
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleTitle(e)}
               className={styles.input}
               type="text"
               id="title"
-              name="title"
               placeholder="title"
-              value={recipe.title}
+              value={title}
+              autoComplete="off"
             />
             {errors.title && <p className={styles.p}>{errors.title}</p>}
           </div>
 
           <div className={styles.input}>
             <Inputt
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleSummary(e)}
               type="text"
               id="summary"
-              name="summary"
               placeholder="summary"
-              value={recipe.summary}
+              value={summary}
+              autoComplete="off"
             />
             {errors.summary && <p className={styles.p}>{errors.summary}</p>}
           </div>
           <div className={styles.input}>
             <Inputt
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleSteps(e)}
               type="text"
               id="steps"
-              name="steps"
               placeholder="steps"
               autoComplete="off"
-              value={recipe.steps}
+              value={steps}
             />
             {errors.steps && <p className={styles.p}>{errors.steps}</p>}
           </div>
           <div className={styles.input}>
             <Inputt
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleHealthScore(e)}
               type="number"
               id="healthScore"
-              name="healthScore"
               placeholder="healthScore"
-              value={recipe.healthScore}
+              autoComplete="off"
+              value={healthScore}
             />
             {errors.healthScore && (
               <p className={styles.p}>{errors.healthScore}</p>
@@ -166,46 +171,32 @@ export default function Create() {
           </div>
           <div className={styles.input}>
             <Inputt
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleImage(e)}
               type="text"
               id="image"
-              name="image"
               placeholder="image"
-              value={recipe.image}
+              autoComplete="off"
+              value={image}
             />
             {errors.image && <p className={styles.p}>{errors.image}</p>}
           </div>
-
-          <label className={styles.option}>
-            Diets Types
-            <select
-              className={styles.option}
-              name="diets"
-              onChange={(e) => handleSelect(e)}
-            >
-              <option defaultValue=""></option>
-              {diets.map((e, i) => {
-                return (
-                  <option key={e.id} value={e.name}>
-                    {e.name}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-          {errors.diet && <p className={styles.p}>{errors.diet}</p>}
-
           <div>
-            {recipe.diet.map((d) => (
-              <p>
-                {d}
-                <button type="button" onClick={(e) => deleteDiet(e, d)}>
-                  X
-                </button>
-              </p>
-            ))}
+            {diets.map((di, i) => {
+              return (
+                <div key={i} className={styles.diets}>
+                  <input
+                    checked={diet.includes(di.name)}
+                    onChange={handleTypes}
+                    type="checkbox"
+                    value={di.name}
+                    name={di.name}
+                  />
+                  {di.name}
+                </div>
+              );
+            })}
           </div>
-          <br />
+          {errors.diet && <p className={styles.p}>{errors.diet}</p>}
         </div>
         <div className={styles.buttons}>
           <Link to={"/home"}>

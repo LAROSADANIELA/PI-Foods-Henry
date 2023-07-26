@@ -139,7 +139,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 460px;
-  height: 700px;
+  height: 750px;
   margin: 8% auto;
   margin-top: 30px;
   background: #a9bf04;
@@ -164,15 +164,8 @@ body {
   margin-top: 5px;
   color: #da0606;
 }
-.option {
+.diets {
   font-size: 15px;
-  width: 90%;
-  padding: 10px 5px;
-  margin: 5px 0;
-  margin-top: 10px;
-  border: 0;
-  background: transparent;
-  background-color: #a9bf04;
   color: #f2f2f2;
 }
 
