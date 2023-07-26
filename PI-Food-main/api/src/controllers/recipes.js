@@ -116,7 +116,7 @@ const searchByTitle = async (title) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
   try {
     const { title } = req.query;
     if (title) {
@@ -131,7 +131,7 @@ const getAll = async (req, res) => {
       res.status(200).json(data);
     }
   } catch (error) {
-    res.send(error);
+    next(error);
   }
 };
 
@@ -140,7 +140,7 @@ const getAll = async (req, res) => {
 // Debe traer solo los datos pedidos en la ruta de detalle de receta
 // Incluir los tipos de dieta asociados
 
-const searchById = async (req, res) => {
+const searchById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const typeId = isNaN(id) ? "db" : "api";
@@ -192,14 +192,14 @@ const searchById = async (req, res) => {
       return res.send(searchIdBD);
     }
   } catch (error) {
-    res.send(error);
+    next(error);
   }
 };
 
 // [ ] POST /recipes:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 // Crea una receta en la base de datos relacionada con sus tipos de dietas.
-const recipePost = async (req, res) => {
+const recipePost = async (req, res, next) => {
   try {
     const { title, summary, healthScore, steps, diet, image } = req.body;
     const newRecipe = await Recipe.create({
@@ -215,7 +215,7 @@ const recipePost = async (req, res) => {
     newRecipe.addDiet(dietTypesRecipeDb);
     res.status(200).send(newRecipe);
   } catch (error) {
-    res.send(error);
+    next(error);
   }
 };
 
