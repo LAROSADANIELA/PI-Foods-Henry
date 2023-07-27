@@ -28,7 +28,7 @@ export function getRecipeId(id) {
       };
       recipeId();
     } catch (error) {
-      dispatch(getRecipeIdFailure(error.message));
+      dispatch(getRecipeIdFailure(error.response.data));
       console.log(error);
     }
   };

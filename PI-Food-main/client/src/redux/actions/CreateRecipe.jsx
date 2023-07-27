@@ -26,7 +26,7 @@ export function postRecipe(recipe) {
       const response = await RecipeApi.post("/recipes", recipe);
       dispatch(postRecipeSuccess(response));
     } catch (error) {
-      dispatch(postRecipeFailure(error.message));
+      dispatch(postRecipeFailure(error.response.data));
       console.log(error);
     }
   };

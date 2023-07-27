@@ -29,7 +29,7 @@ export function getDiets() {
       };
       getDiets();
     } catch (error) {
-      dispatch(getDietsFailure(error.message));
+      dispatch(getDietsFailure(error.response.data));
       console.log(error);
     }
   };
