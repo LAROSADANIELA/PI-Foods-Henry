@@ -22,7 +22,7 @@ export default function Detail() {
       image={recipeId.image}
       title={recipeId.title}
       name={recipeId.diets.map((name) => {
-        return name;
+        return <span>{name}&nbsp;&nbsp;</span>;
       })}
       healthScore={recipeId.healthScore}
       summary={recipeId.summary}
