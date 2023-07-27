@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const { Recipe, Diet } = require("../db.js");
 const { FoodAPI } = require("../services/axios/instance");
 const { FOOD_API_KEY } = process.env;
@@ -6,12 +7,15 @@ const { FOOD_API_KEY } = process.env;
 //https://api.spoonacular.com/recipes/715415/information?apiKey=305fe584bb3b49f29d95d9dd1d1682cd
 const getRecipesApi = async () => {
   try {
-    const request = await FoodAPI.get("/complexSearch", {
-      params: {
-        addRecipeInformation: true,
-        number: 100,
-      },
-    });
+    const request = await axios.get(
+      `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`
+    );
+    // FoodAPI.get("/complexSearch", {
+    //   params: {
+    //     addRecipeInformation: true,
+    //     number: 100,
+    //   },
+    // });
     infoDiets = await request.data.results?.map((e) => {
       return {
         id: e.id,
